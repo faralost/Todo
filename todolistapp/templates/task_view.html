@@ -19,5 +19,8 @@
     {% else %}
         <p>Дата выполнения: Дата не определена</p>
     {% endif %}
+    <br><form action="/task/delete?pk={{ task.pk}}" method="POST">
+        {% csrf_token %}
+    <button type="submit">Удалить</button> </form><br>
 </body>
 </html>

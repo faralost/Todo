@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from todolistapp.models import Task
 
@@ -30,3 +30,11 @@ def task_create(request):
         context = {"task": new_task}
 
         return render(request, 'task_view.html', context)
+
+
+def task_delete(request):
+    task_pk = request.GET.get('pk')
+    task = Task.objects.get(pk=task_pk)
+    task.delete()
+    response = redirect('/tasks/')
+    return response
