@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>new task</title>
+    {#    <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
+</head>
+<body>
+<form action="/tasks/add/" method="post">
+    {% csrf_token %}
+
+    <label>Task:</label><br/>
+    <input type="text" required name="task"/><br/>
+
+    <label>Status:</label><br/>
+    <select name="status">
+    <option selected value="new">Новая</option>
+    <option value="in_progress">В процессе</option>
+    <option value="done">Сделано</option>
+   </select><br/>
+
+    <label>Date:</label><br/>
+    <input type="text" placeholder="YYYY-MM-DD" name="deadline"/><br/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+<br><a href="/tasks/">Вернуться к списку задач</a><br/>
+</body>
+</html>
