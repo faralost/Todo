@@ -23,18 +23,21 @@
             <label class="form-label">Задача</label>
             <input type="text" required name="task" class="form-control">
         </div>
-        <select class="form-select form-select-lg mb-3" name="status" aria-label=".form-select-lg">
-            <option selected value="new">Новая</option>
-            <option value="in_progress">В процессе</option>
-            <option value="done">Сделано</option>
-        </select>
+        <div class="mb-3">
+            <label class="form-label">Статус</label>
+            <select class="form-select form-select-lg mb-3" name="status" aria-label=".form-select-lg">
+                <option selected value="new">Новая</option>
+                <option value="in_progress">В процессе</option>
+                <option value="done">Сделано</option>
+            </select>
+        </div>
         <div class="mb-3">
             <label class="form-label">Дата выполнения</label>
-            <input type="text" placeholder="YYYY-MM-DD" name="deadline" class="form-control">
+            <input type="text" placeholder="ГГГГ-ММ-ДД" name="deadline" class="form-control">
+            <div id="emailHelp" class="form-text">Пожалуйста введите дату в указанном формате!</div>
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Создать</button>
     </form>
 </div>
-
 </body>
 </html>

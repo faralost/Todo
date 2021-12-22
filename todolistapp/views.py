@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.exceptions import ValidationError
 
 from todolistapp.models import Task
 
@@ -23,13 +24,18 @@ def task_create(request):
     if request.method == 'GET':
         return render(request, 'task_create.html')
     else:
-        task = request.POST.get('task')
-        status = request.POST.get('status')
-        deadline = request.POST.get('deadline')
-        new_task = Task.objects.create(task=task, status=status, deadline=deadline or None)
-        context = {"task": new_task}
-
-        return render(request, 'task_view.html', context)
+        try:
+            task = request.POST.get('task').strip()
+            if not task:
+                task = 'Вы создали пустую задачу!'
+            status = request.POST.get('status')
+            deadline = request.POST.get('deadline')
+            new_task = Task.objects.create(task=task, status=status, deadline=deadline or None)
+            context = {"task": new_task}
+            return render(request, 'task_view.html', context)
+        except ValidationError:
+            response = redirect('/tasks/add/')
+            return response
 
 
 def task_delete(request):
