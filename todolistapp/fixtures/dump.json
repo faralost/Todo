@@ -1,0 +1,120 @@
+Tracking file by folder pattern:  migrations
+[
+{
+  "model": "todolistapp.task",
+  "pk": 2,
+  "fields": {
+    "task": "Change work place",
+    "status": "in_progress",
+    "deadline": null
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 3,
+  "fields": {
+    "task": "Study study study",
+    "status": "in_progress",
+    "deadline": null
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 4,
+  "fields": {
+    "task": "buy MacBook",
+    "status": "done",
+    "deadline": "2021-10-09"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 5,
+  "fields": {
+    "task": "finish attractor courses",
+    "status": "in_progress",
+    "deadline": "2022-06-30"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 6,
+  "fields": {
+    "task": "watch the new season of The Witcher",
+    "status": "new",
+    "deadline": "2021-12-25"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 8,
+  "fields": {
+    "task": "play football",
+    "status": "new",
+    "deadline": "2021-12-25"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 20,
+  "fields": {
+    "task": "go home and relax",
+    "status": "new",
+    "deadline": "2021-12-23"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 21,
+  "fields": {
+    "task": "play cyberpunk 2077 ",
+    "status": "new",
+    "deadline": null
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 22,
+  "fields": {
+    "task": "test 1111111",
+    "status": "done",
+    "deadline": null
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 23,
+  "fields": {
+    "task": "сходить с друзьями на фильм Человек-Паук Вдали от Дома",
+    "status": "done",
+    "deadline": "2021-12-15"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 25,
+  "fields": {
+    "task": "test 4 task4",
+    "status": "new",
+    "deadline": "2021-10-10"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 27,
+  "fields": {
+    "task": "new one to me life",
+    "status": "new",
+    "deadline": "2022-02-02"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 32,
+  "fields": {
+    "task": "Вы создали пустую задачу!",
+    "status": "new",
+    "deadline": null
+  }
+}
+]
