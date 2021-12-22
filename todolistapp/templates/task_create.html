@@ -26,9 +26,9 @@
         <div class="mb-3">
             <label class="form-label">Статус</label>
             <select class="form-select form-select-lg mb-3" name="status" aria-label=".form-select-lg">
-                <option selected value="new">Новая</option>
-                <option value="in_progress">В процессе</option>
-                <option value="done">Сделано</option>
+                {% for choice in status_choices%}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="mb-3">

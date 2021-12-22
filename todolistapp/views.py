@@ -22,7 +22,7 @@ def task_view(request):
 
 def task_create(request):
     if request.method == 'GET':
-        return render(request, 'task_create.html')
+        return render(request, 'task_create.html', {'status_choices': Task.status_choices})
     else:
         try:
             task = request.POST.get('task').strip()
