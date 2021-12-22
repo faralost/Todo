@@ -6,21 +6,38 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>task</title>
-{#    <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <br><a href="/tasks/add/">Создать новую задачу</a><br/>
-    <br><a href="/tasks/">Вернуться к списку задач</a><br/>
-    <p>Задача: {{ task.task }}</p>
-    <p>Статус: {{ task.status }}</p>
-    {% if task.deadline %}
-        <p>Дата выполнения: {{ task.deadline }}</p>
-    {% else %}
-        <p>Дата выполнения: Дата не определена</p>
-    {% endif %}
-    <br><form action="/task/delete?pk={{ task.pk}}" method="POST">
+<div class="container">
+    <a href="/tasks/add/">Создать новую задачу</a><br/>
+    <a href="/tasks/">Вернуться к списку задач</a><br/>
+</div>
+<div class="card text-center">
+    <div class="card-header">
+        Статус: {{ task.status }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Задача:</h5>
+        <p class="card-text">{{ task.task }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        {% if task.deadline %}
+            <p>Дата выполнения: {{ task.deadline }}</p>
+        {% else %}
+            <p>Дата выполнения: дата не определена</p>
+        {% endif %}
+    </div>
+</div>
+<div class="container">
+    <form action="/task/delete?pk={{ task.pk }}" method="POST">
         {% csrf_token %}
-    <button type="submit">Удалить</button> </form><br>
+        <button type="submit" class="btn btn-primary">Удалить</button>
+    </form>
+</div>
+
 </body>
 </html>
