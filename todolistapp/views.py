@@ -14,9 +14,8 @@ def tasks_list_view(request):
     return render(request, 'tasks.html', {'tasks': tasks})
 
 
-def task_view(request):
-    task_pk = request.GET.get('pk')
-    task = Task.objects.get(pk=task_pk)
+def task_view(request, pk):
+    task = Task.objects.get(pk=pk)
     context = {'task': task}
     return render(request, 'task_view.html', context)
 
@@ -33,7 +32,7 @@ def task_create(request):
             status = request.POST.get('status')
             deadline = request.POST.get('deadline')
             new_task = Task.objects.create(task=task, status=status, deadline=deadline or None)
-            return HttpResponseRedirect(f'/task?pk={new_task.pk}')
+            return HttpResponseRedirect(f'/task/{new_task.pk}')
         except ValidationError:
             response = redirect('/tasks/add/')
             return response

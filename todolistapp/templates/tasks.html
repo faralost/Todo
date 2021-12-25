@@ -22,7 +22,7 @@
 <div class="container">
     {% for task in tasks %}
         <div class="list-group">
-            <a href="/task?pk={{ task.pk }}" class="list-group-item list-group-item-action" aria-current="true">
+            <a href="/task/{{ task.pk }}" class="list-group-item list-group-item-action" aria-current="true">
                 {{ task.task }}
             </a>
         </div>
