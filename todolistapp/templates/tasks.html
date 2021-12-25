@@ -13,8 +13,8 @@
 </head>
 <body>
 <div class="container">
-    <a href="/tasks/add/">Создать новую задачу</a><br>
-    <a href="/">Вернуться на главную</a><br/>
+    <a href="{% url 'task_add' %}">Создать новую задачу</a><br>
+    <a href="{% url 'index' %}">Вернуться на главную</a><br/>
 </div>
 <div class="container">
     <h2>Список Задач</h2>
@@ -22,7 +22,7 @@
 <div class="container">
     {% for task in tasks %}
         <div class="list-group">
-            <a href="/task/{{ task.pk }}" class="list-group-item list-group-item-action" aria-current="true">
+            <a href="{% url 'task_view' task.pk %}" class="list-group-item list-group-item-action" aria-current="true">
                 {{ task.task }}
             </a>
         </div>

@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect
 
 from todolistapp.models import Task
 
@@ -26,20 +25,16 @@ def task_create(request):
         try:
             task = request.POST.get('task').strip()
             if not task:
-                response = redirect('/tasks/add/')
-                return response
+                return redirect('task_add')
             status = request.POST.get('status')
             deadline = request.POST.get('deadline')
             new_task = Task.objects.create(task=task, status=status, deadline=deadline or None)
-            return HttpResponseRedirect(f'/task/{new_task.pk}')
+            return redirect('task_view', pk=new_task.pk)
         except ValidationError:
-            response = redirect('/tasks/add/')
-            return response
+            return redirect('task_add')
 
 
-def task_delete(request):
-    task_pk = request.GET.get('pk')
-    task = Task.objects.get(pk=task_pk)
+def task_delete(request, pk):
+    task = Task.objects.get(pk=pk)
     task.delete()
-    response = redirect('/tasks/')
-    return response
+    return redirect('tasks_list_view')

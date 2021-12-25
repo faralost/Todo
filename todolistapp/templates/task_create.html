@@ -14,10 +14,10 @@
 <body>
 
 <div class="container">
-    <a href="/tasks/">Вернуться к списку задач</a>
+    <a href="{% url 'tasks_list_view' %}">Вернуться к списку задач</a>
 </div>
 <div class="container">
-    <form class="task-add-form" action="/tasks/add/" method="post">
+    <form action="{% url 'task_add' %}" method="post">
         {% csrf_token %}
         <div class="mb-3">
             <label class="form-label">Задача</label>
