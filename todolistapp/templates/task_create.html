@@ -11,6 +11,10 @@
                 <input type="text" required name="task" class="form-control">
             </div>
             <div class="mb-3">
+                <label class="form-label">Подробное описание</label>
+                <textarea class="form-control" rows="4" name="task_description"></textarea>
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Статус</label>
                 <select class="form-select form-select-lg mb-3" name="status" aria-label=".form-select-lg">
                     {% for choice in status_choices %}

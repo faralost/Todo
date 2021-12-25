@@ -28,7 +28,9 @@ def task_create(request):
                 return redirect('task_add')
             status = request.POST.get('status')
             deadline = request.POST.get('deadline')
-            new_task = Task.objects.create(task=task, status=status, deadline=deadline or None)
+            task_description = request.POST.get('task_description')
+            new_task = Task.objects.create(task=task, status=status, deadline=deadline or None,
+                                           task_description=task_description or None)
             return redirect('task_view', pk=new_task.pk)
         except ValidationError:
             return redirect('task_add')

@@ -3,22 +3,30 @@
 {% block title %}Задача{% endblock %}
 
 {% block content %}
+    <div class="conteiner">
     <div class="card text-center">
         <div class="card-header">
-            Статус: {{ task.get_status_display }}
+            статус: {{ task.get_status_display }}
         </div>
         <div class="card-body">
-            <h5 class="card-title">Задача:</h5>
-            <p class="card-text">{{ task.task }}</p>
+            <h5 class="card-title">{{ task.task }}</h5>
+            {% if task.task_description %}
+                <p class="card-text">{{ task.task_description|linebreaks }}</p>
+            {% else %}
+                <p class="card-text">подробное описание задачи отсутсвует</p>
+            {% endif %}
+
         </div>
         <div class="card-footer text-muted">
             {% if task.deadline %}
-                <p>Дата выполнения: {{ task.deadline }}</p>
+                <p>дата выполнения: {{ task.deadline }}</p>
             {% else %}
-                <p>Дата выполнения: дата не определена</p>
+                <p>дата выполнения: дата не определена</p>
             {% endif %}
         </div>
     </div>
+    </div>
+
     <div class="container">
         <form action="{% url 'task_delete' task.pk %}" method="POST">
             {% csrf_token %}
