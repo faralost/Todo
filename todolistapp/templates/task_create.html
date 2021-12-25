@@ -4,9 +4,6 @@
 
 {% block content %}
     <div class="container">
-        <a href="{% url 'tasks_list_view' %}">Вернуться к списку задач</a>
-    </div>
-    <div class="container">
         <form action="{% url 'task_add' %}" method="post">
             {% csrf_token %}
             <div class="mb-3">

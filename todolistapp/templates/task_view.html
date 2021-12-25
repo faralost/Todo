@@ -3,10 +3,6 @@
 {% block title %}Задача{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <a href="{% url 'task_add' %}">Создать новую задачу</a><br/>
-        <a href="{% url 'tasks_list_view' %}">Вернуться к списку задач</a><br/>
-    </div>
     <div class="card text-center">
         <div class="card-header">
             Статус: {{ task.get_status_display }}
