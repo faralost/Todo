@@ -10,6 +10,8 @@ class Task(models.Model):
     task = models.CharField(max_length=300, verbose_name='Задача')
     status = models.CharField(max_length=20, choices=status_choices, default=new, verbose_name='статус')
     deadline = models.DateField(max_length=10, null=True, blank=True, default=None, verbose_name='Дата выполнения')
+    task_description = models.TextField(max_length=3000, null=True, blank=True, default=None,
+                                        verbose_name='Подробное описание')
 
     def __str__(self):
         return f"{self.pk}. {self.task}: {self.status}"
