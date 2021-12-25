@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 
@@ -15,9 +15,8 @@ def tasks_list_view(request):
 
 
 def task_view(request, pk):
-    task = Task.objects.get(pk=pk)
-    context = {'task': task}
-    return render(request, 'task_view.html', context)
+    task = get_object_or_404(Task, pk=pk)
+    return render(request, 'task_view.html', {'task': task})
 
 
 def task_create(request):
