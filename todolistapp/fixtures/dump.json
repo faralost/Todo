@@ -6,7 +6,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "Change work place",
     "status": "in_progress",
-    "deadline": null
+    "deadline": null,
+    "task_description": "here we have long text about our task"
   }
 },
 {
@@ -15,7 +16,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "Study study study",
     "status": "in_progress",
-    "deadline": null
+    "deadline": null,
+    "task_description": "here we have another long text about our task"
   }
 },
 {
@@ -24,7 +26,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "buy MacBook",
     "status": "done",
-    "deadline": "2021-10-09"
+    "deadline": "2021-10-09",
+    "task_description": null
   }
 },
 {
@@ -33,7 +36,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "finish attractor courses",
     "status": "in_progress",
-    "deadline": "2022-06-30"
+    "deadline": "2022-06-30",
+    "task_description": null
   }
 },
 {
@@ -42,7 +46,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "watch the new season of The Witcher",
     "status": "new",
-    "deadline": "2021-12-25"
+    "deadline": "2021-12-25",
+    "task_description": null
   }
 },
 {
@@ -51,7 +56,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "play football",
     "status": "new",
-    "deadline": "2021-12-25"
+    "deadline": "2021-12-25",
+    "task_description": null
   }
 },
 {
@@ -60,7 +66,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "go home and relax",
     "status": "new",
-    "deadline": "2021-12-23"
+    "deadline": "2021-12-23",
+    "task_description": null
   }
 },
 {
@@ -69,16 +76,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "play cyberpunk 2077 ",
     "status": "new",
-    "deadline": null
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 22,
-  "fields": {
-    "task": "test 1111111",
-    "status": "done",
-    "deadline": null
+    "deadline": null,
+    "task_description": null
   }
 },
 {
@@ -87,16 +86,8 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "сходить с друзьями на фильм Человек-Паук Вдали от Дома",
     "status": "done",
-    "deadline": "2021-12-15"
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 25,
-  "fields": {
-    "task": "test 4 task4",
-    "status": "new",
-    "deadline": "2021-10-10"
+    "deadline": "2021-12-15",
+    "task_description": "here we have another long text about our task"
   }
 },
 {
@@ -105,16 +96,18 @@ Tracking file by folder pattern:  migrations
   "fields": {
     "task": "new one to me life",
     "status": "new",
-    "deadline": "2022-02-02"
+    "deadline": "2022-02-02",
+    "task_description": null
   }
 },
 {
   "model": "todolistapp.task",
-  "pk": 32,
+  "pk": 28,
   "fields": {
-    "task": "Вы создали пустую задачу!",
+    "task": "test one",
     "status": "new",
-    "deadline": null
+    "deadline": "2021-12-30",
+    "task_description": "test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one"
   }
 }
 ]
