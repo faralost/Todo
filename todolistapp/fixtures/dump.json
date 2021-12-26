@@ -2,16 +2,6 @@ Tracking file by folder pattern:  migrations
 [
 {
   "model": "todolistapp.task",
-  "pk": 2,
-  "fields": {
-    "task": "Change work place",
-    "status": "in_progress",
-    "deadline": null,
-    "task_description": "here we have long text about our task"
-  }
-},
-{
-  "model": "todolistapp.task",
   "pk": 3,
   "fields": {
     "task": "Study study study",
@@ -108,6 +98,26 @@ Tracking file by folder pattern:  migrations
     "status": "new",
     "deadline": "2021-12-30",
     "task_description": "test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 36,
+  "fields": {
+    "task": "new onew onew onew one oneew one task after adding task description field",
+    "status": "new",
+    "deadline": null,
+    "task_description": "dasdasd.       asdasdasd\r\n\r\ndasdasd\r\n111111"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 47,
+  "fields": {
+    "task": "lost lost lost lost",
+    "status": "new",
+    "deadline": null,
+    "task_description": "pre {\r\n        font-size: inherit;\r\n        color: inherit;\r\n        border: initial;\r\n        padding: initial;\r\n        font-family: inherit;\r\n}"
   }
 }
 ]
