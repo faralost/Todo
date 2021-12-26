@@ -9,7 +9,7 @@ def index_view(request):
 
 
 def tasks_list_view(request):
-    tasks = Task.objects.order_by('deadline')
+    tasks = Task.objects.order_by('-pk')
     return render(request, 'tasks.html', {'tasks': tasks})
 
 
