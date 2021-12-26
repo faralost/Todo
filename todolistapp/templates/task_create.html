@@ -2,6 +2,8 @@
 
 {% block title %}Добавление задачи{% endblock %}
 
+{% block add-task-nav %}{% endblock %}
+
 {% block content %}
     <div class="container">
         <form action="{% url 'task_add' %}" method="post">
