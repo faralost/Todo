@@ -1,3 +1,15 @@
-.container{
+.container {
     margin-top: 10px;
+}
+
+.card-header {
+    color: red;
+}
+
+pre {
+    font-family: inherit;
+}
+
+.card{
+    text-align: left!important;
 }
