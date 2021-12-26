@@ -13,3 +13,7 @@ pre {
 .card{
     text-align: left!important;
 }
+
+b{
+    color: red;
+}

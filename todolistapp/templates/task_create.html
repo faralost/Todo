@@ -7,7 +7,8 @@
         <form action="{% url 'task_add' %}" method="post">
             {% csrf_token %}
             <div class="mb-3">
-                <label class="form-label">Задача</label>
+                <p><b>*</b> <i>- обязательные для заполнения поля</i></p>
+                <label class="form-label">Задача <b>*</b></label>
                 <input type="text" required name="task" class="form-control">
             </div>
             <div class="mb-3">
@@ -15,7 +16,7 @@
                 <textarea class="form-control" rows="4" name="task_description"></textarea>
             </div>
             <div class="mb-3">
-                <label class="form-label">Статус</label>
+                <label class="form-label">Статус <b>*</b></label>
                 <select class="form-select form-select-lg mb-3" name="status" aria-label=".form-select-lg">
                     {% for choice in status_choices %}
                         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
