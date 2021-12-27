@@ -109,7 +109,7 @@ LANGUAGE_CODE = 'ru-RU'
 
 DATE_FORMAT = 'd E Y'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True
 
