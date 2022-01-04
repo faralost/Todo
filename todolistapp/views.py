@@ -44,3 +44,15 @@ def task_delete(request, pk):
         task.delete()
         return redirect('tasks_list_view')
 
+
+def task_update_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'update.html', {'task': task, 'status_choices': Task.status_choices})
+    elif request.method == 'POST':
+        task.task = request.POST.get('task')
+        task.status = request.POST.get('status')
+        task.deadline = request.POST.get('deadline') or None
+        task.task_description = request.POST.get('task_description') or None
+        task.save()
+        return redirect('task_view', pk=task.pk)

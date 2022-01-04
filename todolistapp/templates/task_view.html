@@ -28,9 +28,7 @@
     </div>
 
     <div class="container">
-        <form action="{% url 'task_delete' task.pk %}" method="GET">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Удалить</button>
-        </form>
+        <a href="{% url 'task_delete' task.pk %}">Удалить задачу</a> &nbsp;
+        <a href="{% url 'task_update' task.pk %}">Редактировать задачу</a>
     </div>
 {% endblock %}
