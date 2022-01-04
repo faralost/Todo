@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ValidationError
 
+from todolistapp.forms import TaskForm
 from todolistapp.models import Task
 
 
@@ -20,20 +21,19 @@ def task_view(request, pk):
 
 def task_create(request):
     if request.method == 'GET':
-        return render(request, 'task_create.html', {'status_choices': Task.status_choices})
+        form = TaskForm()
+        return render(request, 'task_create.html', {'form': form})
     else:
-        try:
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
             task = request.POST.get('task').strip()
-            if not task:
-                return redirect('task_add')
             status = request.POST.get('status')
             deadline = request.POST.get('deadline')
             task_description = request.POST.get('task_description')
             new_task = Task.objects.create(task=task, status=status, deadline=deadline or None,
                                            task_description=task_description or None)
             return redirect('task_view', pk=new_task.pk)
-        except ValidationError:
-            return redirect('task_add')
+        return render(request, 'task_create.html', {'form': form})
 
 
 def task_delete(request, pk):
