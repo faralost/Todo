@@ -37,6 +37,10 @@ def task_create(request):
 
 
 def task_delete(request, pk):
-    task = Task.objects.get(pk=pk)
-    task.delete()
-    return redirect('tasks_list_view')
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'delete.html', {'task': task})
+    elif request.method == 'POST':
+        task.delete()
+        return redirect('tasks_list_view')
+
