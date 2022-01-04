@@ -48,11 +48,20 @@ def task_delete(request, pk):
 def task_update_view(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'GET':
-        return render(request, 'update.html', {'task': task, 'status_choices': Task.status_choices})
+        form = TaskForm(initial={
+            'task': task.task,
+            'status': task.status,
+            'deadline': task.deadline,
+            'task_description': task.task_description
+        })
+        return render(request, 'update.html', {'task': task, 'form': form})
     elif request.method == 'POST':
-        task.task = request.POST.get('task')
-        task.status = request.POST.get('status')
-        task.deadline = request.POST.get('deadline') or None
-        task.task_description = request.POST.get('task_description') or None
-        task.save()
-        return redirect('task_view', pk=task.pk)
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.task = request.POST.get('task')
+            task.status = request.POST.get('status')
+            task.deadline = request.POST.get('deadline') or None
+            task.task_description = request.POST.get('task_description') or None
+            task.save()
+            return redirect('task_view', pk=task.pk)
+        return render(request, 'update.html', {'task': task, 'form': form})

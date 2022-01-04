@@ -16,6 +16,8 @@
                     {{ task.task }}
                 </a>
             </div>
+            <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
+            <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
         {% endfor %}
     </div>
 {% endblock %}

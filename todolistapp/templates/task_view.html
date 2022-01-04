@@ -19,7 +19,7 @@
         </div>
         <div class="card-footer text-muted">
             {% if task.deadline %}
-                <p>дата выполнения: {{ task.deadline }}</p>
+                <p>дата выполнения: {{ task.deadline|date:"d F, Y" }}</p>
             {% else %}
                 <p>дата выполнения: дата не определена</p>
             {% endif %}
@@ -28,7 +28,7 @@
     </div>
 
     <div class="container">
-        <a href="{% url 'task_delete' task.pk %}">Удалить задачу</a> &nbsp;
-        <a href="{% url 'task_update' task.pk %}">Редактировать задачу</a>
+        <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить задачу</a> &nbsp;
+        <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать задачу</a>
     </div>
 {% endblock %}

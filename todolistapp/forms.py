@@ -11,4 +11,4 @@ class TaskForm(forms.Form):
     task_description = forms.CharField(max_length=3000, required=False, label='Описание:',
                                        widget=widgets.Textarea(attrs={'rows': 5, 'cols': 30}))
     deadline = forms.DateField(required=False, label='Дата выполнения:',
-                               widget=widgets.DateInput(attrs={'type': 'date'}))
+                               widget=widgets.DateInput(attrs={'placeholder': "ГГГГ-ММ-ДД", 'type': 'date'}))
