@@ -9,15 +9,24 @@
         <h2>Список Задач</h2>
     </div>
     <div class="container">
-        {% for task in tasks %}
-            <div class="list-group">
-                <a href="{% url 'task_view' task.pk %}" class="list-group-item list-group-item-action"
-                   aria-current="true">
-                    {{ task.task }}
-                </a>
-            </div>
-            <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
-            <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
-        {% endfor %}
+        <form action="{% url 'tasks_list_view' %}" method="post">
+            {% csrf_token %}
+            {% for task in tasks %}
+                <div class="list-group">
+                    <label for="#">
+                        <a href="{% url 'task_view' task.pk %}" class="list-group-item list-group-item-action"
+                           aria-current="true">
+                            <input type="checkbox" name="tasks_id" value="{{ task.pk }}">&nbsp;
+                            {{ task.task }}
+                        </a>
+                    </label>
+                </div>
+                <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
+                <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
+            {% endfor %}
+        <br><br>
+        <button type="submit" class="btn btn-primary">Удалить выбранные задачи</button><br>
+        </form>
+
     </div>
 {% endblock %}

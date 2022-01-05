@@ -10,8 +10,15 @@ def index_view(request):
 
 
 def tasks_list_view(request):
-    tasks = Task.objects.order_by('-pk')
-    return render(request, 'tasks.html', {'tasks': tasks})
+    if request.method == 'GET':
+        tasks = Task.objects.order_by('-pk')
+        return render(request, 'tasks.html', {'tasks': tasks})
+    else:
+        tasks_id = request.POST.getlist('tasks_id')
+        for id in tasks_id:
+            task = Task.objects.get(pk=id)
+            task.delete()
+        return redirect('tasks_list_view')
 
 
 def task_view(request, pk):
@@ -26,10 +33,10 @@ def task_create(request):
     else:
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            task = request.POST.get('task').strip()
-            status = request.POST.get('status')
-            deadline = request.POST.get('deadline')
-            task_description = request.POST.get('task_description')
+            task = form.cleaned_data.get('task')
+            status = form.cleaned_data.get('status')
+            deadline = form.cleaned_data.get('deadline')
+            task_description = form.cleaned_data.get('task_description')
             new_task = Task.objects.create(task=task, status=status, deadline=deadline or None,
                                            task_description=task_description or None)
             return redirect('task_view', pk=new_task.pk)
@@ -51,17 +58,17 @@ def task_update_view(request, pk):
         form = TaskForm(initial={
             'task': task.task,
             'status': task.status,
-            'deadline': task.deadline,
+            'deadline': task.deadline.strftime('%Y-%m-%d'),
             'task_description': task.task_description
         })
         return render(request, 'update.html', {'task': task, 'form': form})
     elif request.method == 'POST':
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            task.task = request.POST.get('task')
-            task.status = request.POST.get('status')
-            task.deadline = request.POST.get('deadline') or None
-            task.task_description = request.POST.get('task_description') or None
+            task = form.cleaned_data.get('task')
+            task.status = form.cleaned_data.get('status')
+            task.deadline = form.cleaned_data.get('deadline') or None
+            task.task_description = form.cleaned_data.get('task_description') or None
             task.save()
             return redirect('task_view', pk=task.pk)
         return render(request, 'update.html', {'task': task, 'form': form})

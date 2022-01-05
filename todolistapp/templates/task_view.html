@@ -19,7 +19,7 @@
         </div>
         <div class="card-footer text-muted">
             {% if task.deadline %}
-                <p>дата выполнения: {{ task.deadline|date:"d F, Y" }}</p>
+                <p>дата выполнения: {{ task.deadline }}</p>
             {% else %}
                 <p>дата выполнения: дата не определена</p>
             {% endif %}
