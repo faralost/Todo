@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.exceptions import ValidationError
 
 from todolistapp.forms import TaskForm
 from todolistapp.models import Task
@@ -55,10 +54,11 @@ def task_delete(request, pk):
 def task_update_view(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'GET':
+        deadline = task.deadline.strftime('%Y-%m-%d') if task.deadline else task.deadline
         form = TaskForm(initial={
             'task': task.task,
             'status': task.status,
-            'deadline': task.deadline.strftime('%Y-%m-%d'),
+            'deadline': deadline,
             'task_description': task.task_description
         })
         return render(request, 'update.html', {'task': task, 'form': form})

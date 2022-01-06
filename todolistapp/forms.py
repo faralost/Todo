@@ -4,11 +4,11 @@ from django.forms import widgets
 from todolistapp.models import Task
 
 
-class TaskForm(forms.Form):
-    task = forms.CharField(max_length=300, required=True, label="Задача:")
-    status = forms.ChoiceField(required=True, label='Статус:', widget=widgets.Select,
-                               choices=Task.status_choices)
-    task_description = forms.CharField(max_length=3000, required=False, label='Описание:',
-                                       widget=widgets.Textarea(attrs={'rows': 5, 'cols': 30}))
-    deadline = forms.DateField(required=False, label='Дата выполнения:',
-                               widget=widgets.DateInput(attrs={'type': 'date'}))
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = '__all__'
+        widgets = {
+            'deadline': widgets.DateInput(attrs={'type': 'date'}),
+            'task_description': widgets.Textarea(attrs={'rows': 5, 'cols': 30})
+        }
