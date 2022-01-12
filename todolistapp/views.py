@@ -5,19 +5,15 @@ from todolistapp.models import Task
 
 
 def index_view(request):
-    return render(request, 'index.html')
-
-
-def tasks_list_view(request):
     if request.method == 'GET':
         tasks = Task.objects.order_by('-pk')
-        return render(request, 'tasks.html', {'tasks': tasks})
+        return render(request, 'index.html', {'tasks': tasks})
     else:
         tasks_id = request.POST.getlist('tasks_id')
         for id in tasks_id:
             task = Task.objects.get(pk=id)
             task.delete()
-        return redirect('tasks_list_view')
+        return redirect('index')
 
 
 def task_view(request, pk):
