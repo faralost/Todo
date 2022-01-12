@@ -27,11 +27,12 @@ class TaskView(TemplateView):
         return super().get_context_data(**kwargs)
 
 
-def task_create(request):
-    if request.method == 'GET':
+class TaskCreate(View):
+    def get(self, request):
         form = TaskForm()
         return render(request, 'task_create.html', {'form': form})
-    else:
+
+    def post(self, request):
         form = TaskForm(data=request.POST)
         if form.is_valid():
             task = form.cleaned_data.get('task')
@@ -74,4 +75,3 @@ def task_update_view(request, pk):
             task.save()
             return redirect('task_view', pk=task.pk)
         return render(request, 'update.html', {'task': task, 'form': form})
-
