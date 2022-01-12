@@ -45,13 +45,16 @@ class TaskCreate(View):
         return render(request, 'task_create.html', {'form': form})
 
 
-def task_delete(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    if request.method == 'GET':
+class TaskDelete(View):
+    def get(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs['pk'])
         return render(request, 'delete.html', {'task': task})
-    elif request.method == 'POST':
+
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs['pk'])
         task.delete()
-        return redirect('tasks_list_view')
+        return redirect('index')
+
 
 
 def task_update_view(request, pk):
