@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
+from django.views.generic import TemplateView
 
 from todolistapp.forms import TaskForm
 from todolistapp.models import Task
 
 
-def index_view(request):
-    if request.method == 'GET':
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
         tasks = Task.objects.order_by('-pk')
         return render(request, 'index.html', {'tasks': tasks})
-    else:
+
+    def post(self, request, *args, **kwargs):
         tasks_id = request.POST.getlist('tasks_id')
         for id in tasks_id:
             task = Task.objects.get(pk=id)
@@ -16,9 +19,12 @@ def index_view(request):
         return redirect('index')
 
 
-def task_view(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    return render(request, 'task_view.html', {'task': task})
+class TaskView(TemplateView):
+    template_name = 'task_view.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['task'] = get_object_or_404(Task, pk=kwargs['pk'])
+        return super().get_context_data(**kwargs)
 
 
 def task_create(request):
