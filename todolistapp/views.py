@@ -65,10 +65,11 @@ def task_update_view(request, pk):
     elif request.method == 'POST':
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            task = form.cleaned_data.get('task')
+            task.task = form.cleaned_data.get('task')
             task.status = form.cleaned_data.get('status')
             task.deadline = form.cleaned_data.get('deadline') or None
             task.task_description = form.cleaned_data.get('task_description') or None
             task.save()
             return redirect('task_view', pk=task.pk)
         return render(request, 'update.html', {'task': task, 'form': form})
+
