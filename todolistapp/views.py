@@ -6,17 +6,20 @@ from todolistapp.forms import TaskForm
 from todolistapp.models import Task
 
 
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        tasks = Task.objects.order_by('-pk')
-        return render(request, 'index.html', {'tasks': tasks})
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
-    def post(self, request, *args, **kwargs):
-        tasks_id = request.POST.getlist('tasks_id')
-        for id in tasks_id:
-            task = Task.objects.get(pk=id)
-            task.delete()
-        return redirect('index')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = Task.objects.order_by('-pk')
+        return context
+
+    # def post(self, request, *args, **kwargs):
+    #     tasks_id = request.POST.getlist('tasks_id')
+    #     for id in tasks_id:
+    #         task = Task.objects.get(pk=id)
+    #         task.delete()
+    #     return redirect('index')
 
 
 class TaskView(TemplateView):
