@@ -57,12 +57,11 @@ class TaskDelete(View):
 class TaskUpdate(View):
     def get(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
-        deadline = task.deadline.strftime('%Y-%m-%d') if task.deadline else task.deadline
         form = TaskForm(initial={
             'task': task.task,
+            'description': task.description,
             'status': task.status,
-            'deadline': deadline,
-            'task_description': task.task_description
+            'type': task.type,
         })
         return render(request, 'update.html', {'task': task, 'form': form})
 
@@ -71,9 +70,9 @@ class TaskUpdate(View):
         form = TaskForm(data=request.POST)
         if form.is_valid():
             task.task = form.cleaned_data.get('task')
+            task.description = form.cleaned_data.get('description')
             task.status = form.cleaned_data.get('status')
-            task.deadline = form.cleaned_data.get('deadline') or None
-            task.task_description = form.cleaned_data.get('task_description') or None
+            task.type = form.cleaned_data.get('type')
             task.save()
             return redirect('task_view', pk=task.pk)
         return render(request, 'update.html', {'task': task, 'form': form})
