@@ -1,122 +1,152 @@
 [
 {
+  "model": "todolistapp.type",
+  "pk": 1,
+  "fields": {
+    "name": "Задача"
+  }
+},
+{
+  "model": "todolistapp.type",
+  "pk": 2,
+  "fields": {
+    "name": "Ошибка"
+  }
+},
+{
+  "model": "todolistapp.type",
+  "pk": 3,
+  "fields": {
+    "name": "Улучшение"
+  }
+},
+{
+  "model": "todolistapp.status",
+  "pk": 1,
+  "fields": {
+    "name": "Новый"
+  }
+},
+{
+  "model": "todolistapp.status",
+  "pk": 2,
+  "fields": {
+    "name": "В процессе"
+  }
+},
+{
+  "model": "todolistapp.status",
+  "pk": 3,
+  "fields": {
+    "name": "Выполнено"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 1,
+  "fields": {
+    "task": "Тестовая задача 1",
+    "description": "Тестовая задача 1 Тестовая задача 1 Тестовая задача 1 \r\nТестовая задача 1 Тестовая задача 1 \r\nТестовая задача 1",
+    "status": 1,
+    "type": 1,
+    "created_at": "2022-01-12T11:55:43.555Z",
+    "updated_at": "2022-01-12T11:55:43.555Z"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 2,
+  "fields": {
+    "task": "Тестовая задача 2",
+    "description": "",
+    "status": 2,
+    "type": 1,
+    "created_at": "2022-01-12T11:56:51.478Z",
+    "updated_at": "2022-01-12T11:56:51.478Z"
+  }
+},
+{
   "model": "todolistapp.task",
   "pk": 3,
   "fields": {
-    "task": "Study study study",
-    "status": "in_progress",
-    "deadline": null,
-    "task_description": "here we have another long text about our task"
+    "task": "Тестовая задача 3",
+    "description": "",
+    "status": 3,
+    "type": 1,
+    "created_at": "2022-01-12T11:57:13.080Z",
+    "updated_at": "2022-01-12T11:57:13.080Z"
   }
 },
 {
   "model": "todolistapp.task",
   "pk": 4,
   "fields": {
-    "task": "buy MacBook",
-    "status": "done",
-    "deadline": "2021-10-09",
-    "task_description": null
+    "task": "Исправление ошибки задачи 1",
+    "description": "Исправление ошибки задачи 1 Исправление ошибки задачи 1\r\nИсправление ошибки задачи 1",
+    "status": 1,
+    "type": 2,
+    "created_at": "2022-01-12T11:57:52.293Z",
+    "updated_at": "2022-01-12T11:57:52.294Z"
   }
 },
 {
   "model": "todolistapp.task",
   "pk": 5,
   "fields": {
-    "task": "finish attractor courses",
-    "status": "in_progress",
-    "deadline": "2022-06-30",
-    "task_description": null
+    "task": "Исправление ошибки задачи 2",
+    "description": "Исправление ошибки задачи 2",
+    "status": 2,
+    "type": 2,
+    "created_at": "2022-01-12T11:58:06.115Z",
+    "updated_at": "2022-01-12T11:58:06.115Z"
   }
 },
 {
   "model": "todolistapp.task",
   "pk": 6,
   "fields": {
-    "task": "watch the new season of The Witcher",
-    "status": "new",
-    "deadline": "2021-12-25",
-    "task_description": null
+    "task": "Исправление ошибки задачи 3",
+    "description": "",
+    "status": 3,
+    "type": 2,
+    "created_at": "2022-01-12T11:58:14.965Z",
+    "updated_at": "2022-01-12T11:58:14.965Z"
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 7,
+  "fields": {
+    "task": "Улучшение задачи 1",
+    "description": "Улучшение задачи 1 Улучшение задачи 1\r\nУлучшение задачи 1\r\nУлучшение задачи 1",
+    "status": 1,
+    "type": 3,
+    "created_at": "2022-01-12T11:58:39.609Z",
+    "updated_at": "2022-01-12T11:58:39.609Z"
   }
 },
 {
   "model": "todolistapp.task",
   "pk": 8,
   "fields": {
-    "task": "play football",
-    "status": "new",
-    "deadline": "2021-12-25",
-    "task_description": null
+    "task": "Улучшение задачи 2",
+    "description": "Улучшение задачи 2",
+    "status": 2,
+    "type": 3,
+    "created_at": "2022-01-12T11:58:52.150Z",
+    "updated_at": "2022-01-12T11:58:52.150Z"
   }
 },
 {
   "model": "todolistapp.task",
-  "pk": 20,
+  "pk": 9,
   "fields": {
-    "task": "go home and relax",
-    "status": "new",
-    "deadline": "2021-12-23",
-    "task_description": null
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 21,
-  "fields": {
-    "task": "play cyberpunk 2077 ",
-    "status": "new",
-    "deadline": null,
-    "task_description": null
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 23,
-  "fields": {
-    "task": "сходить с друзьями на фильм Человек-Паук Вдали от Дома",
-    "status": "done",
-    "deadline": "2021-12-15",
-    "task_description": "here we have another long text about our task"
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 27,
-  "fields": {
-    "task": "new one to me life",
-    "status": "new",
-    "deadline": "2022-02-02",
-    "task_description": null
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 28,
-  "fields": {
-    "task": "test one",
-    "status": "new",
-    "deadline": "2021-12-30",
-    "task_description": "test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one test one description long one"
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 36,
-  "fields": {
-    "task": "new onew onew onew one oneew one task after adding task description field",
-    "status": "new",
-    "deadline": null,
-    "task_description": "dasdasd.       asdasdasd\r\n\r\ndasdasd\r\n111111"
-  }
-},
-{
-  "model": "todolistapp.task",
-  "pk": 47,
-  "fields": {
-    "task": "lost lost lost lost",
-    "status": "new",
-    "deadline": null,
-    "task_description": "pre {\r\n        font-size: inherit;\r\n        color: inherit;\r\n        border: initial;\r\n        padding: initial;\r\n        font-family: inherit;\r\n}"
+    "task": "Улучшение задачи 3333",
+    "description": "",
+    "status": 3,
+    "type": 3,
+    "created_at": "2022-01-12T11:59:01.799Z",
+    "updated_at": "2022-01-13T07:17:20.475Z"
   }
 }
 ]
