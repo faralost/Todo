@@ -38,12 +38,7 @@ class TaskCreate(View):
     def post(self, request):
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            task = form.cleaned_data.get('task')
-            status = form.cleaned_data.get('status')
-            deadline = form.cleaned_data.get('deadline')
-            task_description = form.cleaned_data.get('task_description')
-            new_task = Task.objects.create(task=task, status=status, deadline=deadline or None,
-                                           task_description=task_description or None)
+            new_task = form.save()
             return redirect('task_view', pk=new_task.pk)
         return render(request, 'task_create.html', {'form': form})
 
