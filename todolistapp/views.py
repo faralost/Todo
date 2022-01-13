@@ -14,12 +14,12 @@ class IndexView(TemplateView):
         context['tasks'] = Task.objects.order_by('-pk')
         return context
 
-    # def post(self, request, *args, **kwargs):
-    #     tasks_id = request.POST.getlist('tasks_id')
-    #     for id in tasks_id:
-    #         task = Task.objects.get(pk=id)
-    #         task.delete()
-    #     return redirect('index')
+    def post(self, request, *args, **kwargs):
+        tasks_id = request.POST.getlist('tasks_id')
+        for id in tasks_id:
+            task = Task.objects.get(pk=id)
+            task.delete()
+        return redirect('index')
 
 
 class TaskView(TemplateView):
