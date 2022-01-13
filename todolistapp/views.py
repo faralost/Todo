@@ -44,11 +44,11 @@ class TaskCreate(View):
 
 
 class TaskDelete(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
         return render(request, 'delete.html', {'task': task})
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
         task.delete()
         return redirect('index')
