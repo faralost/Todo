@@ -34,7 +34,7 @@ class Task(models.Model):
     type = models.ForeignKey('todolistapp.Type', on_delete=models.RESTRICT, related_name='tasks_old', verbose_name='Тип')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
-
+    types = models.ManyToManyField('todolistapp.Type', related_name='tasks')
 
     def __str__(self):
         return f"{self.pk}. {self.task}"
