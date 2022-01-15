@@ -33,7 +33,7 @@ class Task(models.Model):
                                verbose_name='Статус')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
-    types = models.ManyToManyField('todolistapp.Type', related_name='tasks')
+    types = models.ManyToManyField('todolistapp.Type', related_name='tasks', verbose_name='Типы')
 
     def __str__(self):
         return f"{self.pk}. {self.task}"
