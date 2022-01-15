@@ -31,7 +31,6 @@ class Task(models.Model):
                                    verbose_name='Полное описание')
     status = models.ForeignKey('todolistapp.Status', on_delete=models.RESTRICT, related_name='tasks',
                                verbose_name='Статус')
-    type = models.ForeignKey('todolistapp.Type', on_delete=models.RESTRICT, related_name='tasks_old', verbose_name='Тип')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
     types = models.ManyToManyField('todolistapp.Type', related_name='tasks')

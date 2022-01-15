@@ -4,10 +4,10 @@ from todolistapp.models import Task, Status, Type
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['id', 'task', 'type', 'status']
-    list_filter = ['status', 'type']
+    list_display = ['id', 'task', 'status']
+    list_filter = ['status', 'types']
     search_fields = ['task']
-    fields = ['task', 'description', 'type', 'status', 'created_at', 'updated_at']
+    fields = ['task', 'description', 'types', 'status', 'created_at', 'updated_at']
     readonly_fields = ['created_at', 'updated_at']
 
 
