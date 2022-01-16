@@ -29,7 +29,7 @@ class Task(models.Model):
     task = models.CharField(max_length=300, verbose_name='Задача')
     description = models.TextField(max_length=3000, null=True, blank=True, default=None,
                                    verbose_name='Полное описание')
-    status = models.ForeignKey('todolistapp.Status', on_delete=models.RESTRICT, related_name='tasks',
+    status = models.ForeignKey('todolistapp.Status', on_delete=models.PROTECT, related_name='tasks',
                                verbose_name='Статус')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
