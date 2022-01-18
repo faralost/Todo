@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 
@@ -26,7 +27,7 @@ class Status(models.Model):
 
 
 class Task(models.Model):
-    task = models.CharField(max_length=300, verbose_name='Задача')
+    task = models.CharField(max_length=300, verbose_name='Задача', validators=(MinLengthValidator(3), ))
     description = models.TextField(max_length=3000, null=True, blank=True, default=None,
                                    verbose_name='Полное описание')
     status = models.ForeignKey('todolistapp.Status', on_delete=models.PROTECT, related_name='tasks',

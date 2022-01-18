@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 from todolistapp.forms import TaskForm
 from todolistapp.models import Task
@@ -30,19 +31,16 @@ class TaskView(TemplateView):
         return super().get_context_data(**kwargs)
 
 
-class TaskCreate(View):
-    def get(self, request):
-        form = TaskForm()
-        return render(request, 'task_create.html', {'form': form})
+class TaskCreate(FormView):
+    form_class = TaskForm
+    template_name = 'task_create.html'
 
-    def post(self, request):
-        form = TaskForm(data=request.POST)
-        if form.is_valid():
-            types = form.cleaned_data.pop('types')
-            new_task = form.save()
-            new_task.types.set(types)
-            return redirect('task_view', pk=new_task.pk)
-        return render(request, 'task_create.html', {'form': form})
+    def form_valid(self, form):
+        self.task = form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('task_view', kwargs={'pk': self.task.pk})
 
 
 class TaskDelete(View):
