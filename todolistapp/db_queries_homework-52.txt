@@ -1,0 +1,20 @@
+Импорты:
+>>> from todolistapp.models import Task, Status, Type
+>>> from django.utils import timezone
+>>> from datetime import timedelta
+>>> from django.db.models import Q, F, Count
+
+
+Запросы:
+1.>>> Task.objects.filter(status__name='Выполнено', updated_at__gt=timezone.now()-timedelta(days=30))
+2.>>> Task.objects.filter(status__name__in=['Новый', 'В процессе'], types__name__in=['Задача', 'Улучшение'])
+3.>>> Task.objects.filter(Q(task__icontains='bug') | (Q(types__name='Ошибка') & ~Q(status__name='Выполнено')))
+
+
+Бонусные запросы:
+1.>>> Task.objects.values('id', 'task', 'status__name', 'types__name')
+2.>>> Task.objects.filter(task__exact=F('description'))
+3.>>> types = Type.objects.annotate(tasks_count=Count('tasks'))
+  >>> for t in types:
+  ...     t.name
+  ...     t.tasks_count
