@@ -2,19 +2,31 @@
 >>> from todolistapp.models import Task, Status, Type
 >>> from django.utils import timezone
 >>> from datetime import timedelta
->>> from django.db.models import Q, F, Count
+>>> from django.db.models import Q, F, Count, Prefetch
 
 
 Запросы:
 1.>>> Task.objects.filter(status__name='Выполнено', updated_at__gt=timezone.now()-timedelta(days=30))
+
+но более правильный вариант:
+Task.objects.filter(status__name='Выполнено', updated_at__gt=(timezone.now()-timedelta(days=timezone.now().day)).replace(day=timezone.now().day))
+
 2.>>> Task.objects.filter(status__name__in=['Новый', 'В процессе'], types__name__in=['Задача', 'Улучшение'])
-3.>>> Task.objects.filter(Q(task__icontains='bug') | (Q(types__name='Ошибка') & ~Q(status__name='Выполнено')))
+3.>>> Task.objects.filter((Q(task__icontains='bug') | Q(types__name='Ошибка')) & ~Q(status__name='Выполнено'))
 
 
 Бонусные запросы:
 1.>>> Task.objects.values('id', 'task', 'status__name', 'types__name')
+
+[{'id': t.id, 'task': t.task, 'status': t.status__name, 'types': [type.name for type in a.types.all()]} for t in Task.objects.all()]
+[{'id':t.id, 'task':t.task, 'status': t.status.name, 'types': [type.name for type in t.types.all()]} for t in Task.objects.all().prefetch_related(Prefetch('types'))]
+с помощью Prefatch мы сокращаем количество запросов в базу в ДВА раза
+
 2.>>> Task.objects.filter(task__exact=F('description'))
 3.>>> types = Type.objects.annotate(tasks_count=Count('tasks'))
   >>> for t in types:
   ...     t.name
   ...     t.tasks_count
+
+ лучше:
+ Type.objects.values('name').annotate(tasks_count=Count('tasks'))
