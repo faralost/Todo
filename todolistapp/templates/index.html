@@ -5,6 +5,8 @@
 {% block task-list %}{% endblock %}
 
 {% block content %}
+    {% include 'partial/simple_search.html' %}
+    <br>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
@@ -30,8 +32,6 @@
                 <br>
             </form>
             <br>
-        {% else %}
-            <h2>Список Задач на данный момент пуст</h2>
         {% endif %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
