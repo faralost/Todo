@@ -1,19 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 
 from todolistapp.forms import TaskForm
 from todolistapp.models import Task
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'index.html'
+    context_object_name = 'tasks'
+    paginate_by = 5
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tasks'] = Task.objects.order_by('-pk')
-        return context
+    def get_queryset(self):
+        return Task.objects.order_by('-created_at')
 
     def post(self, request, *args, **kwargs):
         tasks_id = request.POST.getlist('tasks_id')

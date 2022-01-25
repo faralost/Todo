@@ -5,7 +5,9 @@
 {% block task-list %}{% endblock %}
 
 {% block content %}
-    <div class="container">
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
         {% if tasks %}
             <h2>Список Задач</h2>
             <form action="{% url 'index' %}" method="post">
@@ -28,8 +30,10 @@
                 <br>
             </form>
             <br>
-            {% else %}
+        {% else %}
             <h2>Список Задач на данный момент пуст</h2>
         {% endif %}
-    </div>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}
