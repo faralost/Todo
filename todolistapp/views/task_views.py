@@ -5,7 +5,7 @@ from django.views import View
 from django.views.generic import FormView, ListView, DetailView, CreateView
 
 from todolistapp.forms import TaskForm, SimpleSearchForm
-from todolistapp.models import Task
+from todolistapp.models import Task, Project
 
 
 class TaskIndexView(ListView):
@@ -58,6 +58,11 @@ class TaskCreate(CreateView):
     form_class = TaskForm
     template_name = 'task/create.html'
     model = Task
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+        form.instance.project = project
+        return super().form_valid(form)
 
 
 class TaskDelete(View):

@@ -2,6 +2,12 @@
 
 {% block title %}Проект{% endblock %}
 
+{% block add-task-nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'project_task_add' project.pk %}">Добавить задачу</a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <div class="card text-center">
         <div class="card-header">
@@ -15,29 +21,29 @@
         </div>
         <div class="card-footer text-muted">
             {% if project.date_end %}
-            <p>дата окончания: {{ project.date_end }}</p>
-                {% else %}
+                <p>дата окончания: {{ project.date_end }}</p>
+            {% else %}
                 <p>дата окончания: не определена</p>
             {% endif %}
         </div>
     </div>
     <br>
     {% if project.tasks.all %}
-            <h2>Список задач данного проекта:</h2>
-                {% for task in project.tasks.all %}
-                    <div class="list-group">
-                        <label for="#">
-                            <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action">
-                                {{ task.task }}
-                            </a>
-                        </label>
-                    </div>
-                    <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
-                    <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
-                {% endfor %}
-                <br><br>
-            <br>
-        {% else %}
+        <h2>Список задач данного проекта:</h2>
+        {% for task in project.tasks.all %}
+            <div class="list-group">
+                <label for="#">
+                    <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action">
+                        {{ task.task }}
+                    </a>
+                </label>
+            </div>
+            <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
+            <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
+        {% endfor %}
+        <br><br>
+        <br>
+    {% else %}
         <h3>Список задач данного проекта пока пуст</h3>
-        {% endif %}
+    {% endif %}
 {% endblock %}
