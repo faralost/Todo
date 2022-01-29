@@ -14,7 +14,7 @@
             <p>дата начала: {{ project.date_start }}</p>
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ project.name }}</h5>
+            <h5 class="card-title">{{ project.name.title }}</h5>
             <p class="card-text">
             <pre>{{ project.description }}</pre>
             </p>
@@ -28,9 +28,12 @@
         </div>
     </div>
     <br>
-    {% if project.tasks.all %}
+    {% if project_tasks %}
         <h2>Список задач данного проекта:</h2>
-        {% for task in project.tasks.all %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+        {% for task in project_tasks %}
             <div class="list-group">
                 <label for="#">
                     <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action">
@@ -42,7 +45,6 @@
             <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
         {% endfor %}
         <br><br>
-        <br>
     {% else %}
         <h3>Список задач данного проекта пока пуст</h3>
     {% endif %}

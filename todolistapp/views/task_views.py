@@ -12,7 +12,7 @@ class TaskIndexView(ListView):
     model = Task
     template_name = 'task/index.html'
     context_object_name = 'tasks'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super().get_queryset()
