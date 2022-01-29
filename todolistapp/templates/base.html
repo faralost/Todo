@@ -15,7 +15,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">Главная</a>
+        <a class="navbar-brand" href="{% url 'task_index' %}">Главная</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,11 +24,14 @@
             <ul class="navbar-nav">
                 {% block add-task-nav %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'task_add' %}">добавить задачу</a>
+                        <a class="nav-link" href="{% url 'task_add' %}">Добавить задачу</a>
                     </li>
                 {% endblock %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'project_index' %}">Проекты</a>
+                </li>
             </ul>
-        {% include 'partial/simple_search.html' with form=search_form%}
+            {% include 'partial/simple_search.html' with form=search_form %}
         </div>
     </div>
 </nav>

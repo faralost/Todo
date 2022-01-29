@@ -8,7 +8,7 @@ from todolistapp.forms import TaskForm, SimpleSearchForm
 from todolistapp.models import Task
 
 
-class IndexView(ListView):
+class TaskIndexView(ListView):
     model = Task
     template_name = 'task/index.html'
     context_object_name = 'tasks'
@@ -46,7 +46,7 @@ class IndexView(ListView):
         for id in tasks_id:
             task = Task.objects.get(pk=id)
             task.delete()
-        return redirect('index')
+        return redirect('task_index')
 
 
 class TaskView(DetailView):
@@ -68,7 +68,7 @@ class TaskDelete(View):
     def post(self, request, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
         task.delete()
-        return redirect('index')
+        return redirect('task_index')
 
 
 class TaskUpdate(FormView):

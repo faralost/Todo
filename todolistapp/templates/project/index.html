@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Список проектов{% endblock %}
+
+{% block content %}
+    {% if projects %}
+        <h2>Список проектов</h2>
+        {% for project in projects %}
+            <div class="list-group">
+                <label for="#">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        {{ project.name }}
+                    </a>
+                </label>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
