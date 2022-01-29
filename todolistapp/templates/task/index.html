@@ -16,7 +16,7 @@
                 {% for task in tasks %}
                     <div class="list-group">
                         <label for="#">
-                            <a href="{% url 'task_view' task.pk %}" class="list-group-item list-group-item-action"
+                            <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action"
                                aria-current="true">
                                 <input type="checkbox" name="tasks_id" value="{{ task.pk }}">&nbsp;
                                 {{ task.task }}

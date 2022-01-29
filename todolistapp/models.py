@@ -1,5 +1,6 @@
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from django.db import models
+from django.urls import reverse
 
 
 class Type(models.Model):
@@ -38,6 +39,9 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
     types = models.ManyToManyField('todolistapp.Type', related_name='tasks', verbose_name='Типы')
+
+    def get_absolute_url(self):
+        return reverse('task_view', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f"{self.pk}. {self.task}"

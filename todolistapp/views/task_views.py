@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import FormView, ListView, DetailView, CreateView
 
 from todolistapp.forms import TaskForm, SimpleSearchForm
 from todolistapp.models import Task
@@ -20,13 +20,6 @@ class IndexView(ListView):
             query = Q(task__icontains=self.search_value) | Q(description__icontains=self.search_value)
             queryset = queryset.filter(query)
         return queryset.order_by('-created_at')
-
-    def post(self, request, *args, **kwargs):
-        tasks_id = request.POST.getlist('tasks_id')
-        for id in tasks_id:
-            task = Task.objects.get(pk=id)
-            task.delete()
-        return redirect('index')
 
     def get_search_form(self):
         return SimpleSearchForm(self.request.GET)
@@ -48,25 +41,23 @@ class IndexView(ListView):
             context['search'] = self.search_value
         return context
 
+    def post(self, request, *args, **kwargs):
+        tasks_id = request.POST.getlist('tasks_id')
+        for id in tasks_id:
+            task = Task.objects.get(pk=id)
+            task.delete()
+        return redirect('index')
 
-class TaskView(TemplateView):
-    template_name = 'task/task_view.html'
 
-    def get_context_data(self, **kwargs):
-        kwargs['task'] = get_object_or_404(Task, pk=kwargs['pk'])
-        return super().get_context_data(**kwargs)
+class TaskView(DetailView):
+    template_name = 'task/detail_view.html'
+    model = Task
 
 
-class TaskCreate(FormView):
+class TaskCreate(CreateView):
     form_class = TaskForm
-    template_name = 'task/task_create.html'
-
-    def form_valid(self, form):
-        self.task = form.save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('task_view', kwargs={'pk': self.task.pk})
+    template_name = 'task/create.html'
+    model = Task
 
 
 class TaskDelete(View):
@@ -83,7 +74,7 @@ class TaskDelete(View):
 class TaskUpdate(FormView):
     form_class = TaskForm
     template_name = 'task/update.html'
-    
+
     def dispatch(self, request, *args, **kwargs):
         self.task = self.get_object()
         return super().dispatch(request, *args, **kwargs)
