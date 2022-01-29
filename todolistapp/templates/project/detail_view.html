@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Проект{% endblock %}
+
+{% block content %}
+    <div class="card text-center">
+        <div class="card-header">
+            <p>дата начала: {{ project.date_start }}</p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ project.name }}</h5>
+            <p class="card-text">
+            <pre>{{ project.description }}</pre>
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+            {% if project.date_end %}
+            <p>дата окончания: {{ project.date_end }}</p>
+                {% else %}
+                <p>дата окончания: не определена</p>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    {% if project.tasks %}
+            <h2>Список задач данного проекта:</h2>
+                {% for task in project.tasks.all %}
+                    <div class="list-group">
+                        <label for="#">
+                            <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action">
+                                {{ task.task }}
+                            </a>
+                        </label>
+                    </div>
+                    <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
+                    <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
+                {% endfor %}
+                <br><br>
+            <br>
+        {% endif %}
+{% endblock %}

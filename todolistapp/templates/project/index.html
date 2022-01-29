@@ -8,7 +8,7 @@
         {% for project in projects %}
             <div class="list-group">
                 <label for="#">
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="{% url 'project_view' project.pk %}" class="list-group-item list-group-item-action">
                         {{ project.name }}
                     </a>
                 </label>
