@@ -10,7 +10,7 @@ from todolistapp.models import Task
 
 class IndexView(ListView):
     model = Task
-    template_name = 'index.html'
+    template_name = 'task/index.html'
     context_object_name = 'tasks'
     paginate_by = 5
 
@@ -50,7 +50,7 @@ class IndexView(ListView):
 
 
 class TaskView(TemplateView):
-    template_name = 'task_view.html'
+    template_name = 'task/task_view.html'
 
     def get_context_data(self, **kwargs):
         kwargs['task'] = get_object_or_404(Task, pk=kwargs['pk'])
@@ -59,7 +59,7 @@ class TaskView(TemplateView):
 
 class TaskCreate(FormView):
     form_class = TaskForm
-    template_name = 'task_create.html'
+    template_name = 'task/task_create.html'
 
     def form_valid(self, form):
         self.task = form.save()
@@ -72,7 +72,7 @@ class TaskCreate(FormView):
 class TaskDelete(View):
     def get(self, request, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
-        return render(request, 'delete.html', {'task': task})
+        return render(request, 'task/delete.html', {'task': task})
 
     def post(self, request, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
@@ -82,7 +82,7 @@ class TaskDelete(View):
 
 class TaskUpdate(FormView):
     form_class = TaskForm
-    template_name = 'update.html'
+    template_name = 'task/update.html'
     
     def dispatch(self, request, *args, **kwargs):
         self.task = self.get_object()
