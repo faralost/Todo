@@ -39,6 +39,8 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
     types = models.ManyToManyField('todolistapp.Type', related_name='tasks', verbose_name='Типы')
+    project = models.ForeignKey('todolistapp.Project', on_delete=models.PROTECT, related_name='tasks',
+                                verbose_name='Проект')
 
     def get_absolute_url(self):
         return reverse('task_view', kwargs={'pk': self.pk})
@@ -58,3 +60,11 @@ class Project(models.Model):
                                    validators=(MaxLengthValidator(500),))
     date_start = models.DateField(verbose_name='Дата начала')
     date_end = models.DateField(verbose_name='Дата окончания', null=True, blank=True, default=None)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        db_table = 'projects'
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
