@@ -50,3 +50,11 @@ class Task(models.Model):
         db_table = 'tasks'
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
+
+
+class Project(models.Model):
+    name = models.CharField(max_length=300, verbose_name='Название проекта', validators=(MinLengthValidator(5),))
+    description = models.TextField(max_length=3000, verbose_name='Описание проекта',
+                                   validators=(MaxLengthValidator(500),))
+    date_start = models.DateField(verbose_name='Дата начала')
+    date_end = models.DateField(verbose_name='Дата окончания', null=True, blank=True, default=None)

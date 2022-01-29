@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from todolistapp.models import Task, Status, Type
+from todolistapp.models import Task, Status, Type, Project
 
 
 class MembershipInline(admin.TabularInline):
@@ -25,6 +25,13 @@ class TypeAdmin(admin.ModelAdmin):
     ]
 
 
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'date_start', 'date_end']
+    search_fields = ['name']
+    fields = ['name', 'description', 'date_start', 'date_end']
+
+
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Status)
 admin.site.register(Type, TypeAdmin)
+admin.site.register(Project, ProjectAdmin)
