@@ -27,9 +27,17 @@
                         <a class="nav-link" href="{% url 'task_add' %}">Добавить задачу</a>
                     </li>
                 {% endblock %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'project_index' %}">Проекты</a>
-                </li>
+                {% block projects %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'project_index' %}">Проекты</a>
+                    </li>
+                {% endblock %}
+
+                {% block add-project-nav %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'project_add' %}">Добавить проект</a>
+                    </li>
+                {% endblock %}
             </ul>
             {% include 'partial/simple_search.html' with form=search_form %}
         </div>

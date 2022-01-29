@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление проекта{% endblock %}
+
+{% block add-project-nav%}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Добавление Проекта</h1>
+        <form method="post">
+            {% include 'partial/form.html' with button_text='Добавить' %}
+        </form>
+    </div>
+{% endblock %}

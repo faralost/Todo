@@ -22,7 +22,7 @@
         </div>
     </div>
     <br>
-    {% if project.tasks %}
+    {% if project.tasks.all %}
             <h2>Список задач данного проекта:</h2>
                 {% for task in project.tasks.all %}
                     <div class="list-group">
@@ -37,5 +37,7 @@
                 {% endfor %}
                 <br><br>
             <br>
+        {% else %}
+        <h3>Список задач данного проекта пока пуст</h3>
         {% endif %}
 {% endblock %}
