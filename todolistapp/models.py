@@ -41,6 +41,7 @@ class Task(models.Model):
     types = models.ManyToManyField('todolistapp.Type', related_name='tasks', verbose_name='Типы')
     project = models.ForeignKey('todolistapp.Project', on_delete=models.CASCADE, related_name='tasks',
                                 verbose_name='Проект')
+    is_deleted = models.BooleanField(default=False, verbose_name='Удаленная задача')
 
     def get_absolute_url(self):
         return reverse('task_view', kwargs={'pk': self.pk})
