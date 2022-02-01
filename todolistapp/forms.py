@@ -47,3 +47,14 @@ class ProjectForm(forms.ModelForm):
             return super(ProjectForm, self).clean()
         except KeyError:
             print("Введите правильную дату.")
+
+
+class ProjectDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ("name",)
+
+    def clean_name(self):
+        if self.instance.name != self.cleaned_data.get("name"):
+            raise ValidationError("Название введенного вами проекта не соответствует!")
+        return self.cleaned_data.get("name")

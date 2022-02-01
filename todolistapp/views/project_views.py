@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from todolistapp.forms import ProjectForm
+from todolistapp.forms import ProjectForm, ProjectDeleteForm
 from todolistapp.models import Project, Task
 
 
@@ -49,3 +49,20 @@ class ProjectDelete(DeleteView):
     template_name = 'project/delete.html'
     model = Project
     success_url = reverse_lazy('project_index')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.method == "POST":
+            self.object_form = ProjectDeleteForm(instance=self.get_object(), data=self.request.POST)
+        else:
+            self.object_form = ProjectDeleteForm()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.object_form
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if self.object_form.is_valid():
+            return super().delete(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)

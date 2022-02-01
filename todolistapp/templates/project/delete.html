@@ -3,10 +3,11 @@
 {% block title %}Удаление проекта{% endblock %}
 
 {% block content %}
-        <h2>Вы уверены что хотите удалить проект: "{{ project.name }}"?</h2><br>
-        <form action="{% url 'project_delete' project.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Удалить</button><br>
-            <br><p><a class="btn btn-primary" href="{% url "project_view" project.pk %}">Не удалять</a></p>
-        </form>
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Введите название проекта "{{ project.name }}"</h2>
+        {% include 'partial/form.html' with button_text="Удалить" %}
+    </form>
+    <br>
+    <a class="btn btn-primary" href="{% url "project_view" project.pk %}">Не удалять</a>
 {% endblock %}
