@@ -1,8 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
-from django.views import View
-from django.views.generic import FormView, ListView, DetailView, CreateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from todolistapp.forms import TaskForm, SimpleSearchForm
 from todolistapp.models import Task, Project
@@ -65,41 +64,18 @@ class TaskCreate(CreateView):
         return super().form_valid(form)
 
 
-class TaskDelete(View):
-    def get(self, request, **kwargs):
-        task = get_object_or_404(Task, pk=kwargs['pk'])
-        return render(request, 'task/delete.html', {'task': task})
+class TaskDelete(DeleteView):
+    model = Task
 
-    def post(self, request, **kwargs):
-        task = get_object_or_404(Task, pk=kwargs['pk'])
-        task.delete()
-        return redirect('task_index')
-
-
-class TaskUpdate(FormView):
-    form_class = TaskForm
-    template_name = 'task/update.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        self.task = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['task'] = self.task
-        return context
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['instance'] = self.task
-        return kwargs
-
-    def form_valid(self, form):
-        self.task = form.save()
-        return super().form_valid(form)
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('task_view', kwargs={'pk': self.task.pk})
+        return reverse('project_view', kwargs={'pk': self.object.project.pk})
 
-    def get_object(self):
-        return get_object_or_404(Task, pk=self.kwargs.get("pk"))
+
+class TaskUpdate(UpdateView):
+    form_class = TaskForm
+    template_name = 'task/update.html'
+    model = Task
+

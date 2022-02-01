@@ -27,6 +27,10 @@
             {% endif %}
         </div>
     </div>
+    <div class="container">
+        <a class="mylink" href="{% url 'project_delete' project.pk %}">Удалить проект</a> &nbsp;
+        <a class="mylink" href="{% url 'project_update' project.pk %}">Редактировать проект</a>
+    </div>
     <br>
     {% if project_tasks %}
         <h2>Список задач данного проекта:</h2>

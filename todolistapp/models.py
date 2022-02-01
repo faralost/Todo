@@ -39,7 +39,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
     types = models.ManyToManyField('todolistapp.Type', related_name='tasks', verbose_name='Типы')
-    project = models.ForeignKey('todolistapp.Project', on_delete=models.PROTECT, related_name='tasks',
+    project = models.ForeignKey('todolistapp.Project', on_delete=models.CASCADE, related_name='tasks',
                                 verbose_name='Проект')
 
     def get_absolute_url(self):

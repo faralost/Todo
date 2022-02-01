@@ -32,15 +32,18 @@ class ProjectForm(forms.ModelForm):
         widgets = {
             'name': widgets.Input(attrs={'size': 26}),
             'description': widgets.Textarea(attrs={'rows': 5, 'cols': 25}),
-            'date_start': widgets.DateInput(attrs={'type': 'date'}),
-            'date_end': widgets.DateInput(attrs={'type': 'date'})
+            'date_start': widgets.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+            'date_end': widgets.DateInput(format='%Y-%m-%d', attrs={'type': 'date'})
         }
 
     def clean(self):
-        date_start = self.cleaned_data['date_start']
-        date_end = self.cleaned_data['date_end']
-        if not date_end:
+        try:
+            date_start = self.cleaned_data['date_start']
+            date_end = self.cleaned_data['date_end']
+            if not date_end:
+                return super(ProjectForm, self).clean()
+            if date_end <= date_start:
+                raise forms.ValidationError("Дата окончания должна быть позже даты начала!")
             return super(ProjectForm, self).clean()
-        if date_end <= date_start:
-            raise forms.ValidationError("Дата окончания должна быть позже даты начала!")
-        return super(ProjectForm, self).clean()
+        except KeyError:
+            print("Введите правильную дату.")

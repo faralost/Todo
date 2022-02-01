@@ -1,7 +1,6 @@
 from django.core.paginator import Paginator
-from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
-from django.views.generic.list import MultipleObjectMixin
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from todolistapp.forms import ProjectForm
 from todolistapp.models import Project, Task
@@ -38,3 +37,15 @@ class ProjectCreate(CreateView):
 
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.pk})
+
+
+class ProjectUpdate(UpdateView):
+    template_name = 'project/update.html'
+    form_class = ProjectForm
+    model = Project
+
+
+class ProjectDelete(DeleteView):
+    template_name = 'project/delete.html'
+    model = Project
+    success_url = reverse_lazy('project_index')

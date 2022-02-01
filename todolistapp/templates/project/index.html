@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}Список проектов{% endblock %}
-{% block projects %}{% endblock %}
+
 
 {% block content %}
     {% if projects %}
@@ -14,6 +14,8 @@
                     </a>
                 </label>
             </div>
+            <a class="mylink" href="{% url 'project_delete' project.pk%}">Удалить</a> &nbsp;
+            <a class="mylink" href="{% url 'project_update' project.pk %}">Редактировать</a>
         {% endfor %}
     {% endif %}
 {% endblock %}

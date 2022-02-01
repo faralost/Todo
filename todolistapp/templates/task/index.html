@@ -17,7 +17,7 @@
                             <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action"
                                aria-current="true">
                                 <input type="checkbox" name="tasks_id" value="{{ task.pk }}">&nbsp;
-                                {{ task.task }}
+                                {{ task.task }} --> (Проект: {{ task.project }})
                             </a>
                         </label>
                     </div>
