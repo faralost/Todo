@@ -23,7 +23,7 @@ class ProjectView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
         page = self.request.GET.get('page')
-        project_tasks = Paginator(self.object.tasks.all().order_by('-created_at'), 5)
+        project_tasks = Paginator(self.object.tasks.all().filter(is_deleted=False).order_by('-created_at'), 5)
         context['project_tasks'] = project_tasks.get_page(page)
         context['page_obj'] = project_tasks.get_page(page)
         context['is_paginated'] = project_tasks.get_page(page)

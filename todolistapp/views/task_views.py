@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -18,7 +19,7 @@ class TaskIndexView(ListView):
         if self.search_value:
             query = Q(task__icontains=self.search_value) | Q(description__icontains=self.search_value)
             queryset = queryset.filter(query)
-        return queryset.order_by('-created_at')
+        return queryset.filter(is_deleted=False).order_by('-created_at')
 
     def get_search_form(self):
         return SimpleSearchForm(self.request.GET)
@@ -44,13 +45,19 @@ class TaskIndexView(ListView):
         tasks_id = request.POST.getlist('tasks_id')
         for id in tasks_id:
             task = Task.objects.get(pk=id)
-            task.delete()
+            task.soft_delete()
         return redirect('task_index')
 
 
 class TaskView(DetailView):
     template_name = 'task/detail_view.html'
     model = Task
+
+    def get_object(self, queryset=None):
+        task = super(TaskView, self).get_object()
+        if task.is_deleted:
+            raise Http404
+        return task
 
 
 class TaskCreate(CreateView):
@@ -66,6 +73,11 @@ class TaskCreate(CreateView):
 
 class TaskDelete(DeleteView):
     model = Task
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.soft_delete()
+        return HttpResponseRedirect(self.get_success_url())
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)

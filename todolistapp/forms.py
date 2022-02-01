@@ -8,7 +8,7 @@ from todolistapp.models import Task, Project
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        exclude = ['project']
+        exclude = ['project', 'is_deleted']
         widgets = {
             'task': widgets.Input(attrs={'size': 26}),
             'description': widgets.Textarea(attrs={'rows': 5, 'cols': 25}),

@@ -49,6 +49,10 @@ class Task(models.Model):
     def __str__(self):
         return f"{self.pk}. {self.task}"
 
+    def soft_delete(self):
+        self.is_deleted = True
+        self.save()
+
     class Meta:
         db_table = 'tasks'
         verbose_name = 'Задача'
