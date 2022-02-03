@@ -1,45 +1,24 @@
-from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse, reverse_lazy
-from django.views.generic import FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
-from todolistapp.forms import TaskForm, SimpleSearchForm
+from todolistapp.forms import TaskForm
 from todolistapp.models import Task, Project
+from todolistapp.views.base import SearchListView
 
 
-class TaskIndexView(ListView):
+class TaskIndexView(SearchListView):
     model = Task
     template_name = 'task/index.html'
     context_object_name = 'tasks'
-    paginate_by = 10
+    paginate_by = 5
+    ordering = ['-created_at']
+    search_fields = ['task__icontains', 'description__icontains']
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.search_value:
-            query = Q(task__icontains=self.search_value) | Q(description__icontains=self.search_value)
-            queryset = queryset.filter(query)
-        return queryset.filter(is_deleted=False).order_by('-created_at')
-
-    def get_search_form(self):
-        return SimpleSearchForm(self.request.GET)
-
-    def get_search_value(self):
-        if self.form.is_valid():
-            return self.form.cleaned_data['search']
-
-    def get(self, request, *args, **kwargs):
-        self.form = self.get_search_form()
-        self.search_value = self.get_search_value()
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-        context['form'] = self.form
-        if self.search_value:
-            context['form'] = SimpleSearchForm(initial={"search": self.search_value})
-            context['search'] = self.search_value
-        return context
+        return queryset.filter(is_deleted=False)
 
     def post(self, request, *args, **kwargs):
         tasks_id = request.POST.getlist('tasks_id')
