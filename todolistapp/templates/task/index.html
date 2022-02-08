@@ -9,7 +9,7 @@
     {% endif %}
         {% if tasks %}
             <h2>Список Задач</h2>
-            <form action="{% url 'task_index' %}" method="post">
+            <form action="{% url 'todolistapp:task_index' %}" method="post">
                 {% csrf_token %}
                 {% for task in tasks %}
                     <div class="list-group">
@@ -21,8 +21,8 @@
                             </a>
                         </label>
                     </div>
-                    <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
-                    <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
+                    <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
+                    <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
                 {% endfor %}
                 <br><br>
                 <button type="submit" class="btn btn-primary">Удалить выбранные задачи</button>

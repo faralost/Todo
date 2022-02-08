@@ -15,7 +15,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'project_index' %}">Главная</a>
+        <a class="navbar-brand" href="{% url 'todolistapp:project_index' %}">Главная</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,13 +25,13 @@
                 {% block add-task-nav %}{% endblock %}
                 {% block tasks %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'task_index' %}">Задачи</a>
+                        <a class="nav-link" href="{% url 'todolistapp:task_index' %}">Задачи</a>
                     </li>
                 {% endblock %}
 
                 {% block add-project-nav %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'project_add' %}">Добавить проект</a>
+                        <a class="nav-link" href="{% url 'todolistapp:project_add' %}">Добавить проект</a>
                     </li>
                 {% endblock %}
             </ul>

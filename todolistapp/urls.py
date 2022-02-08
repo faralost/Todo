@@ -3,6 +3,8 @@ from django.urls import path
 from todolistapp.views.project_views import ProjectIndexView, ProjectView, ProjectCreate, ProjectUpdate, ProjectDelete
 from todolistapp.views.task_views import TaskIndexView, TaskView, TaskCreate, TaskDelete, TaskUpdate
 
+app_name = 'todolistapp'
+
 urlpatterns = [
     path('', ProjectIndexView.as_view(), name='project_index'),
     path('task/<int:pk>/', TaskView.as_view(), name='task_view'),

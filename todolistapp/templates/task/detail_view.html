@@ -28,7 +28,7 @@
     </div>
 
     <div class="container">
-        <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить задачу</a> &nbsp;
-        <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать задачу</a>
+        <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить задачу</a> &nbsp;
+        <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать задачу</a>
     </div>
 {% endblock %}

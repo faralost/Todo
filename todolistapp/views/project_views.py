@@ -36,7 +36,7 @@ class ProjectCreate(CreateView):
     model = Project
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.pk})
+        return reverse('todolistapp:project_view', kwargs={'pk': self.object.pk})
 
 
 class ProjectUpdate(UpdateView):
@@ -48,7 +48,7 @@ class ProjectUpdate(UpdateView):
 class ProjectDelete(DeleteView):
     template_name = 'project/delete.html'
     model = Project
-    success_url = reverse_lazy('project_index')
+    success_url = reverse_lazy('todolistapp:project_index')
     form_class = ProjectDeleteForm
 
     def get_form_kwargs(self):

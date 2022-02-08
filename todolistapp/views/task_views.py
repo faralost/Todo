@@ -25,7 +25,7 @@ class TaskIndexView(SearchListView):
         for id in tasks_id:
             task = Task.objects.get(pk=id)
             task.soft_delete()
-        return redirect('task_index')
+        return redirect('todolistapp:task_index')
 
 
 class TaskView(DetailView):
@@ -62,7 +62,7 @@ class TaskDelete(DeleteView):
         return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.project.pk})
+        return reverse('todolistapp:project_view', kwargs={'pk': self.object.project.pk})
 
 
 class TaskUpdate(UpdateView):

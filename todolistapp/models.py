@@ -44,7 +44,7 @@ class Task(models.Model):
     is_deleted = models.BooleanField(default=False, verbose_name='Удаленная задача')
 
     def get_absolute_url(self):
-        return reverse('task_view', kwargs={'pk': self.pk})
+        return reverse('todolistapp:task_view', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f"{self.pk}. {self.task}"
@@ -75,4 +75,4 @@ class Project(models.Model):
         verbose_name_plural = 'Проекты'
 
     def get_absolute_url(self):
-        return reverse('project_view', kwargs={'pk': self.pk})
+        return reverse('todolistapp:project_view', kwargs={'pk': self.pk})

@@ -4,7 +4,7 @@
 
 {% block add-task-nav %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'project_task_add' project.pk %}">Добавить задачу</a>
+        <a class="nav-link" href="{% url 'todolistapp:project_task_add' project.pk %}">Добавить задачу</a>
     </li>
 {% endblock %}
 
@@ -28,8 +28,8 @@
         </div>
     </div>
     <div class="container">
-        <a class="mylink" href="{% url 'project_delete' project.pk %}">Удалить проект</a> &nbsp;
-        <a class="mylink" href="{% url 'project_update' project.pk %}">Редактировать проект</a>
+        <a class="mylink" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить проект</a> &nbsp;
+        <a class="mylink" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать проект</a>
     </div>
     <br>
     {% if project_tasks %}
@@ -45,8 +45,8 @@
                     </a>
                 </label>
             </div>
-            <a class="mylink" href="{% url 'task_delete' task.pk %}">Удалить</a> &nbsp;
-            <a class="mylink" href="{% url 'task_update' task.pk %}">Редактировать</a>
+            <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
+            <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
         {% endfor %}
         <br><br>
     {% else %}
