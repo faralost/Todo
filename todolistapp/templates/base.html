@@ -40,9 +40,9 @@
                 {% include 'partial/simple_search.html' with form=search_form %}
                 {% if user.is_authenticated %}
                     &nbsp;<span>Привет, {{ user.username }}!</span>
-                    <a href="{% url 'accounts:logout' %}" class="nav-link">Выход</a>
+                    <a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" class="nav-link">Выход</a>
                 {% else %}
-                    <a href="{% url 'accounts:login' %}" class="nav-link">Вход</a>
+                    <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" class="nav-link">Вход</a>
                 {% endif %}
             </div>
         </div>

@@ -51,7 +51,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class TaskDelete(DeleteView):
+class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
 
     def delete(self, request, *args, **kwargs):
@@ -66,7 +66,7 @@ class TaskDelete(DeleteView):
         return reverse('todolistapp:project_view', kwargs={'pk': self.object.project.pk})
 
 
-class TaskUpdate(UpdateView):
+class TaskUpdate(LoginRequiredMixin, UpdateView):
     form_class = TaskForm
     template_name = 'task/update.html'
     model = Task
