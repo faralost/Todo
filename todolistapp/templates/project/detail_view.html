@@ -49,8 +49,10 @@
                     </a>
                 </label>
             </div>
-            <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
-            <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
+            {% if user.is_authenticated %}
+                <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
+                <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
+            {% endif %}
         {% endfor %}
         <br><br>
     {% else %}

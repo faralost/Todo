@@ -7,29 +7,31 @@
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
-        {% if tasks %}
-            <h2>Список Задач</h2>
-            <form action="{% url 'todolistapp:task_index' %}" method="post">
-                {% csrf_token %}
-                {% for task in tasks %}
-                    <div class="list-group">
-                        <label for="#">
-                            <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action"
-                               aria-current="true">
-                                <input type="checkbox" name="tasks_id" value="{{ task.pk }}">&nbsp;
-                                {{ task.task }} --> (Проект: {{ task.project }})
-                            </a>
-                        </label>
-                    </div>
+    {% if tasks %}
+        <h2>Список Задач</h2>
+        <form action="{% url 'todolistapp:task_index' %}" method="post">
+            {% csrf_token %}
+            {% for task in tasks %}
+                <div class="list-group">
+                    <label for="#">
+                        <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action"
+                           aria-current="true">
+                            <input type="checkbox" name="tasks_id" value="{{ task.pk }}">&nbsp;
+                            {{ task.task }} --> (Проект: {{ task.project }})
+                        </a>
+                    </label>
+                </div>
+                {% if user.is_authenticated %}
                     <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
                     <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
-                {% endfor %}
-                <br><br>
-                <button type="submit" class="btn btn-primary">Удалить выбранные задачи</button>
-                <br>
-            </form>
+                {% endif %}
+            {% endfor %}
+            <br><br>
+            <button type="submit" class="btn btn-primary">Удалить выбранные задачи</button>
             <br>
-        {% endif %}
+        </form>
+        <br>
+    {% endif %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
