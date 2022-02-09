@@ -40,13 +40,13 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
         return reverse('todolistapp:project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectUpdate(UpdateView):
+class ProjectUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'project/update.html'
     form_class = ProjectForm
     model = Project
 
 
-class ProjectDelete(DeleteView):
+class ProjectDelete(LoginRequiredMixin, DeleteView):
     template_name = 'project/delete.html'
     model = Project
     success_url = reverse_lazy('todolistapp:project_index')

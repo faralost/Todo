@@ -30,8 +30,10 @@
         </div>
     </div>
     <div class="container">
-        <a class="mylink" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить проект</a> &nbsp;
-        <a class="mylink" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать проект</a>
+        {% if user.is_authenticated %}
+            <a class="mylink" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить проект</a> &nbsp;
+            <a class="mylink" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать проект</a>
+        {% endif %}
     </div>
     <br>
     {% if project_tasks %}

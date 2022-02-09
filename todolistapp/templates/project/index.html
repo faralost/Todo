@@ -9,13 +9,16 @@
         {% for project in projects %}
             <div class="list-group">
                 <label for="#">
-                    <a href="{% url 'todolistapp:project_view' project.pk %}" class="list-group-item list-group-item-action">
+                    <a href="{% url 'todolistapp:project_view' project.pk %}"
+                       class="list-group-item list-group-item-action">
                         {{ project.name.title }}
                     </a>
                 </label>
             </div>
-            <a class="mylink" href="{% url 'todolistapp:project_delete' project.pk%}">Удалить</a> &nbsp;
-            <a class="mylink" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать</a>
+            {% if user.authenticated %}
+                <a class="mylink" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить</a> &nbsp;
+                <a class="mylink" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать</a>
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% endblock %}
