@@ -29,11 +29,12 @@
                             <a class="nav-link" href="{% url 'todolistapp:task_index' %}">Задачи</a>
                         </li>
                     {% endblock %}
-
                     {% block add-project-nav %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'todolistapp:project_add' %}">Добавить проект</a>
-                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'todolistapp:project_add' %}">Добавить проект</a>
+                            </li>
+                        {% endif %}
                     {% endblock %}
                 </ul>
                 {% include 'partial/simple_search.html' with form=search_form %}

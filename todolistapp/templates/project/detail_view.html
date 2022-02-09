@@ -3,9 +3,11 @@
 {% block title %}Проект{% endblock %}
 
 {% block add-task-nav %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'todolistapp:project_task_add' project.pk %}">Добавить задачу</a>
-    </li>
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'todolistapp:project_task_add' project.pk %}">Добавить задачу</a>
+        </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
