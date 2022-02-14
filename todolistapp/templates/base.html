@@ -43,6 +43,7 @@
                     <a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" class="nav-link">Выход</a>
                 {% else %}
                     <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" class="nav-link">Вход</a>
+                    <a href="{% url 'accounts:registration' %}?next={{ request.get_full_path }}" class="nav-link">Регистрация</a>
                 {% endif %}
             </div>
         </div>
