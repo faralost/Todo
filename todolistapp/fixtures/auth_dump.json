@@ -1,0 +1,164 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$E92NCLs4uqM5qMwARZAXmV$jjQ4sd5EvD7pwjFNIULfYb0oyPWI9n2i6TfoyHeetGs=",
+    "last_login": "2022-02-13T08:03:40.178Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-01-29T05:00:03.879Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$PayAPfI3iS2OQf9I65Nj9S$uENsYhgr0QJd7AoQw4V5hCd/hyTMI2VvYd7KMzq2kA0=",
+    "last_login": "2022-02-14T11:24:53.162Z",
+    "is_superuser": false,
+    "username": "faralost",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T08:09:58.508Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$ntL6pVuDqOUSvUjdAzWSZC$DaVO8If6qwFVYDM4EPQSMXLOZB+4fArLtX/UjbkAAYw=",
+    "last_login": "2022-02-13T08:17:47.952Z",
+    "is_superuser": false,
+    "username": "faralost2",
+    "first_name": "",
+    "last_name": "",
+    "email": "faralost@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T08:17:47.863Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$zAuPv4LdgVQcfeQI7XdQr7$hzJtHUPcmo95l7p7EhUoRaLu21IHIF8Dz762q3CWO9k=",
+    "last_login": "2022-02-13T08:52:03.927Z",
+    "is_superuser": false,
+    "username": "faralost4",
+    "first_name": "Farhatjan",
+    "last_name": "",
+    "email": "faralost@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T08:52:03.832Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$ylq8AhtQ57iaZ0kw1KQRz8$JUB30eN4z6N+2DJdugAtdFs9X7HqJma6qs7OgbTyDlk=",
+    "last_login": "2022-02-13T08:58:25.203Z",
+    "is_superuser": false,
+    "username": "faralost3",
+    "first_name": "lostovich",
+    "last_name": "",
+    "email": "faralost@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T08:58:25.106Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$lYZzARhqk9zr3TJ8wERoIe$uv1EPVHDfMlchS3fjHrpiPp4dgudHPqLso8pa1KDYdY=",
+    "last_login": "2022-02-13T09:04:19.331Z",
+    "is_superuser": false,
+    "username": "faralost5",
+    "first_name": "lost",
+    "last_name": "",
+    "email": "faralost@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T09:04:19.238Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$iFTLwQwCtDbB07zSUlJUQg$gmLPnZg5j9VfPUQv3aSj9tMmkQh5SVpMHUNv0vcKmho=",
+    "last_login": "2022-02-13T09:13:27.243Z",
+    "is_superuser": false,
+    "username": "faralost6",
+    "first_name": "",
+    "last_name": "lost",
+    "email": "faralost@icloud.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T09:13:27.149Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$ffDZ6umkbCNdsSYDwX4NAC$J4qjPTe3bAtI0zfjH0k8GSzpT86+JsTy+CodHQTxc4c=",
+    "last_login": "2022-02-13T09:15:49.063Z",
+    "is_superuser": false,
+    "username": "faralost7",
+    "first_name": "fara",
+    "last_name": "",
+    "email": "faralost@icloud.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T09:15:48.971Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$kWyi0x1ndO2dY9Nw1bk23k$LHAr8khGXb/rOfTFFC8EidUtkE2Ttgf1zMMKSzpvlFI=",
+    "last_login": "2022-02-13T09:16:07.920Z",
+    "is_superuser": false,
+    "username": "faralost8",
+    "first_name": "fara",
+    "last_name": "lost",
+    "email": "faralost@icloud.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-13T09:16:07.826Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
