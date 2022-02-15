@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from django.db import models
 from django.urls import reverse
@@ -65,6 +66,7 @@ class Project(models.Model):
                                    validators=(MaxLengthValidator(500),))
     date_start = models.DateField(verbose_name='Дата начала')
     date_end = models.DateField(verbose_name='Дата окончания', null=True, blank=True, default=None)
+    users = models.ManyToManyField(get_user_model(), related_name='projects')
 
     def __str__(self):
         return f"{self.name}"
