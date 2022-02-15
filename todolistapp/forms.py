@@ -28,7 +28,7 @@ class SimpleSearchForm(forms.Form):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = '__all__'
+        exclude = ['users']
         widgets = {
             'name': widgets.Input(attrs={'size': 26}),
             'description': widgets.Textarea(attrs={'rows': 5, 'cols': 25}),
@@ -58,3 +58,12 @@ class ProjectDeleteForm(forms.ModelForm):
         if self.instance.name != self.cleaned_data.get("name"):
             raise ValidationError("Название введенного вами проекта не соответствует!")
         return self.cleaned_data.get("name")
+
+
+class ProjectAddUserForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['users']
+        widgets = {
+            'users': widgets.CheckboxSelectMultiple(),
+        }

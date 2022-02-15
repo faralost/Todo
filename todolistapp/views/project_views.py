@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from todolistapp.forms import ProjectForm, ProjectDeleteForm
+from todolistapp.forms import ProjectForm, ProjectDeleteForm, ProjectAddUserForm
 from todolistapp.models import Project, Task
 
 
@@ -57,3 +57,10 @@ class ProjectDelete(LoginRequiredMixin, DeleteView):
         if self.request.method == "POST":
             kwargs['instance'] = self.object
         return kwargs
+
+
+class ProjectAddUser(UpdateView):
+    model = Project
+    form_class = ProjectAddUserForm
+    template_name = 'project/add-user.html'
+

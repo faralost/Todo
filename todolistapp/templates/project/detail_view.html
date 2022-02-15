@@ -11,31 +11,47 @@
 {% endblock %}
 
 {% block content %}
-    <div class="card text-center">
-        <div class="card-header">
-            <p>дата начала: {{ project.date_start }}</p>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card text-center">
+                <div class="card-header">
+                    <p>дата начала: {{ project.date_start }}</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.name.title }}</h5>
+                    <p class="card-text">
+                    <pre>{{ project.description }}</pre>
+                    </p>
+                </div>
+                <div class="card-footer text-muted">
+                    {% if project.date_end %}
+                        <p>дата окончания: {{ project.date_end }}</p>
+                    {% else %}
+                        <p>дата окончания: не определена</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-2">
+                {% if user.is_authenticated %}
+                    <a class="btn btn-danger" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить
+                        проект</a> &nbsp;
+                    <a class="btn btn-warning" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать
+                        проект</a>
+                    &nbsp;
+                    <a class="btn btn-info" href="{% url 'todolistapp:project_add_user' project.pk %}">Изменить пользователей</a>
+                {% endif %}
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ project.name.title }}</h5>
-            <p class="card-text">
-            <pre>{{ project.description }}</pre>
-            </p>
-        </div>
-        <div class="card-footer text-muted">
-            {% if project.date_end %}
-                <p>дата окончания: {{ project.date_end }}</p>
-            {% else %}
-                <p>дата окончания: не определена</p>
-            {% endif %}
+        <div class="col-md-3">
+            <h5>Пользователи:</h5>
+            <ul class="list-group">
+                {% for user in project.users.all %}
+                    <li class="list-group-item">{{ user }}</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-    <div class="container">
-        {% if user.is_authenticated %}
-            <a class="mylink" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить проект</a> &nbsp;
-            <a class="mylink" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать проект</a>
-        {% endif %}
-    </div>
-    <br>
+
     {% if project_tasks %}
         <h2>Список задач данного проекта:</h2>
         {% if is_paginated %}

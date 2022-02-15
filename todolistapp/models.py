@@ -66,7 +66,7 @@ class Project(models.Model):
                                    validators=(MaxLengthValidator(500),))
     date_start = models.DateField(verbose_name='Дата начала')
     date_end = models.DateField(verbose_name='Дата окончания', null=True, blank=True, default=None)
-    users = models.ManyToManyField(get_user_model(), related_name='projects')
+    users = models.ManyToManyField(get_user_model(), related_name='projects', verbose_name='Пользователи')
 
     def __str__(self):
         return f"{self.name}"

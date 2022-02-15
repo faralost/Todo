@@ -1,6 +1,7 @@
 from django.urls import path
 
-from todolistapp.views.project_views import ProjectIndexView, ProjectView, ProjectCreate, ProjectUpdate, ProjectDelete
+from todolistapp.views.project_views import ProjectIndexView, ProjectView, ProjectCreate, ProjectUpdate, ProjectDelete, \
+    ProjectAddUser
 from todolistapp.views.task_views import TaskIndexView, TaskView, TaskCreate, TaskDelete, TaskUpdate
 
 app_name = 'todolistapp'
@@ -16,4 +17,5 @@ urlpatterns = [
     path('project/<int:pk>/tasks/add/', TaskCreate.as_view(), name='project_task_add'),
     path('project/<int:pk>/update/', ProjectUpdate.as_view(), name='project_update'),
     path('project/<int:pk>/delete/', ProjectDelete.as_view(), name='project_delete'),
+    path('project/<int:pk>/add-users/', ProjectAddUser.as_view(), name='project_add_user'),
 ]

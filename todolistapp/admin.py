@@ -29,7 +29,8 @@ class TypeAdmin(admin.ModelAdmin):
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'date_start', 'date_end']
     search_fields = ['name']
-    fields = ['name', 'description', 'date_start', 'date_end']
+    fields = ['name', 'description', 'date_start', 'date_end', 'users']
+    filter_horizontal = ['users']
 
 
 admin.site.register(Task, TaskAdmin)
