@@ -36,6 +36,11 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
     form_class = ProjectForm
     model = Project
 
+    def form_valid(self, form):
+        instance = form.save()
+        instance.users.add(self.request.user)
+        return super(ProjectCreate, self).form_valid(form)
+
     def get_success_url(self):
         return reverse('todolistapp:project_view', kwargs={'pk': self.object.pk})
 
@@ -63,4 +68,3 @@ class ProjectAddUser(UpdateView):
     model = Project
     form_class = ProjectAddUserForm
     template_name = 'project/add-user.html'
-
