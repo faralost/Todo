@@ -75,3 +75,4 @@ class ProjectChangeUser(PermissionRequiredMixin, UpdateView):
 
     def has_permission(self):
         return super().has_permission() and self.request.user in self.get_object().users.all()
+
