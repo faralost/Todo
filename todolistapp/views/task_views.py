@@ -74,6 +74,9 @@ class TaskDelete(PermissionRequiredMixin, DeleteView):
     def get_success_url(self):
         return reverse('todolistapp:project_view', kwargs={'pk': self.object.project.pk})
 
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().project.users.all()
+
 
 class TaskUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'todolistapp.change_task'

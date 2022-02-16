@@ -67,8 +67,11 @@ class ProjectDelete(PermissionRequiredMixin, DeleteView):
         return kwargs
 
 
-class ProjectAddUser(PermissionRequiredMixin, UpdateView):
-    permission_required = 'todolistapp.change_project'
+class ProjectChangeUser(PermissionRequiredMixin, UpdateView):
+    permission_required = 'todolistapp.change_project_users'
     model = Project
     form_class = ProjectAddUserForm
     template_name = 'project/add-user.html'
+
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().users.all()

@@ -3,7 +3,7 @@
 {% block title %}Проект{% endblock %}
 
 {% block add-task-nav %}
-    {% if user.is_authenticated and request.user in project.users.all%}
+    {% if user.is_authenticated and request.user in project.users.all %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'todolistapp:project_task_add' project.pk %}">Добавить задачу</a>
         </li>
@@ -39,8 +39,9 @@
                     {% endif %}
                     {% if perms.todolistapp.change_project %}
                         <a class="btn btn-warning" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать
-                            проект</a>
-                        &nbsp;
+                            проект</a>&nbsp;
+                    {% endif %}
+                    {% if perms.todolistapp.change_project_users and request.user in project.users.all %}
                         <a class="btn btn-info" href="{% url 'todolistapp:project_change_user' project.pk %}">Изменить
                             пользователей</a>
                     {% endif %}
@@ -71,12 +72,12 @@
                 </label>
             </div>
             {% if user.is_authenticated %}
-                {% if perms.todolistapp.delete_task %}
-                <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
+                {% if perms.todolistapp.delete_task and request.user in task.project.users.all %}
+                    <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
                 {% endif %}
-                {% if perms.todolistapp.change_task and request.user in task.project.users.all%}
+                {% if perms.todolistapp.change_task and request.user in task.project.users.all %}
                     <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
-                    {% endif %}
+                {% endif %}
             {% endif %}
         {% endfor %}
         <br><br>

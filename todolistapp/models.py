@@ -76,5 +76,9 @@ class Project(models.Model):
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
 
+        permissions = [
+            ('change_project_users', 'Может изменять пользователей проекта')
+        ]
+
     def get_absolute_url(self):
         return reverse('todolistapp:project_view', kwargs={'pk': self.pk})

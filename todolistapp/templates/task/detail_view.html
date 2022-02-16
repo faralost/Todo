@@ -31,7 +31,7 @@
 
     <div class="container">
         {% if user.is_authenticated %}
-            {% if perms.todolistapp.delete_task %}
+            {% if perms.todolistapp.delete_task and request.user in task.project.users.all%}
             <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить задачу</a> &nbsp;
             {% endif %}
             {% if perms.todolistapp.change_task and request.user in task.project.users.all%}
