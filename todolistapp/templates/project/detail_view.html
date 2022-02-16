@@ -10,6 +10,7 @@
     {% endif %}
 {% endblock %}
 
+{% if user.is_authenticated %}
 {% block content %}
     <div class="row">
         <div class="col-md-9">
@@ -32,7 +33,6 @@
                 </div>
             </div>
             <div class="mt-2">
-                {% if user.is_authenticated %}
                     {% if perms.todolistapp.delete_project %}
                         <a class="btn btn-danger" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить
                             проект</a> &nbsp;
@@ -41,11 +41,10 @@
                         <a class="btn btn-warning" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать
                             проект</a>&nbsp;
                     {% endif %}
-                    {% if perms.todolistapp.change_project_users and request.user in project.users.all %}
+                    {% if perms.todolistapp.change_project_users and request.user in project.users.all%}
                         <a class="btn btn-info" href="{% url 'todolistapp:project_change_user' project.pk %}">Изменить
                             пользователей</a>
                     {% endif %}
-                {% endif %}
             </div>
         </div>
         <div class="col-md-3">
@@ -71,17 +70,16 @@
                     </a>
                 </label>
             </div>
-            {% if user.is_authenticated %}
                 {% if perms.todolistapp.delete_task and request.user in task.project.users.all %}
                     <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
                 {% endif %}
                 {% if perms.todolistapp.change_task and request.user in task.project.users.all %}
                     <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
                 {% endif %}
-            {% endif %}
         {% endfor %}
         <br><br>
     {% else %}
         <h3>Список задач данного проекта пока пуст</h3>
     {% endif %}
 {% endblock %}
+{% endif %}

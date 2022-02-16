@@ -24,11 +24,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     {% block add-task-nav %}{% endblock %}
-                    {% block tasks %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'todolistapp:task_index' %}">Задачи</a>
-                        </li>
-                    {% endblock %}
+                    {% if user.is_authenticated %}
+                        {% block tasks %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'todolistapp:task_index' %}">Задачи</a>
+                            </li>
+                        {% endblock %}
+                    {% endif %}
                     {% block add-project-nav %}
                         {% if user.is_authenticated and perms.todolistapp.add_project %}
                             <li class="nav-item">
@@ -37,8 +39,8 @@
                         {% endif %}
                     {% endblock %}
                 </ul>
+            {% if user.is_authenticated %}
                 {% include 'partial/simple_search.html' with form=search_form %}
-                {% if user.is_authenticated %}
                     &nbsp;<span>Привет, {{ user.username }}!</span>
                     <a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" class="nav-link">Выход</a>
                 {% else %}

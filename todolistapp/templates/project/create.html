@@ -4,9 +4,11 @@
 
 {% block add-project-nav%}{% endblock %}
 
+{% if user.is_authenticated %}
 {% block content %}
         <h1>Добавление Проекта</h1>
         <form method="post">
             {% include 'partial/form.html' with button_text='Добавить' %}
         </form>
 {% endblock %}
+{% endif %}

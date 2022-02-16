@@ -10,7 +10,7 @@ from todolistapp.models import Task, Project
 from todolistapp.views.base import SearchListView
 
 
-class TaskIndexView(SearchListView):
+class TaskIndexView(LoginRequiredMixin, SearchListView):
     model = Task
     template_name = 'task/index.html'
     context_object_name = 'tasks'
@@ -32,7 +32,7 @@ class TaskIndexView(SearchListView):
         return redirect('todolistapp:task_index')
 
 
-class TaskView(DetailView):
+class TaskView(LoginRequiredMixin, DetailView):
     template_name = 'task/detail_view.html'
     model = Task
 
@@ -51,7 +51,7 @@ class TaskCreate(PermissionRequiredMixin, CreateView):
 
     def has_permission(self):
         project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
-        return super().has_permission() and self.request.user in project.users.all()
+        return super().has_permission() and self.request.user in project.users.all() or self.request.user.is_superuser
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
@@ -86,4 +86,3 @@ class TaskUpdate(PermissionRequiredMixin, UpdateView):
 
     def has_permission(self):
         return super().has_permission() and self.request.user in self.get_object().project.users.all()
-

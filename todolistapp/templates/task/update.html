@@ -2,9 +2,11 @@
 
 {% block title %}Изменение задачи{% endblock %}
 
+{% if user.is_authenticated %}
 {% block content %}
         <h1>Редактирование Задачи</h1>
         <form method="post">
             {% include "partial/form.html" with button_text="Изменить"  %}
         </form>
 {% endblock %}
+{% endif %}

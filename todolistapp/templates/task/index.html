@@ -2,6 +2,7 @@
 
 {% block title %}Список задач{% endblock %}
 
+{% if user.is_authenticated %}
 {% block content %}
     <br>
     {% if is_paginated %}
@@ -21,14 +22,12 @@
                         </a>
                     </label>
                 </div>
-                {% if user.is_authenticated %}
                     {% if perms.todolistapp.delete_task and request.user in task.project.users.all %}
                     <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
                     {% endif %}
                     {% if perms.todolistapp.change_task and request.user in task.project.users.all %}
                     <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
                     {% endif %}
-                {% endif %}
             {% endfor %}
             <br><br>
             <button type="submit" class="btn btn-primary">Удалить выбранные задачи</button>
@@ -40,3 +39,4 @@
         {% include 'partial/pagination.html' %}
     {% endif %}
 {% endblock %}
+{% endif %}

@@ -7,7 +7,7 @@ from todolistapp.forms import ProjectForm, ProjectDeleteForm, ProjectAddUserForm
 from todolistapp.models import Project, Task
 
 
-class ProjectIndexView(ListView):
+class ProjectIndexView(LoginRequiredMixin, ListView):
     model = Project
     template_name = 'project/index.html'
     context_object_name = 'projects'
@@ -17,7 +17,7 @@ class ProjectIndexView(ListView):
         return queryset.order_by('-date_end')
 
 
-class ProjectView(DetailView):
+class ProjectView(LoginRequiredMixin, DetailView):
     template_name = 'project/detail_view.html'
     model = Project
 
@@ -75,4 +75,3 @@ class ProjectChangeUser(PermissionRequiredMixin, UpdateView):
 
     def has_permission(self):
         return super().has_permission() and self.request.user in self.get_object().users.all()
-

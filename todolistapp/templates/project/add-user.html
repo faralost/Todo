@@ -2,8 +2,10 @@
 
 {% block title %}Добавление пользователей к проекту{% endblock %}
 
+{% if user.is_authenticated %}
 {% block content %}
         <form method="post">
             {% include 'partial/form.html' with button_text='Сохранить' %}
         </form>
 {% endblock %}
+{% endif %}

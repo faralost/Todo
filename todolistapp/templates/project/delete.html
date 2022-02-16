@@ -2,6 +2,7 @@
 
 {% block title %}Удаление проекта{% endblock %}
 
+{% if user.is_authenticated %}
 {% block content %}
     <form method="POST">
         {% csrf_token %}
@@ -11,3 +12,4 @@
     <br>
     <a class="btn btn-primary" href="{% url "todolistapp:project_view" project.pk %}">Не удалять</a>
 {% endblock %}
+{% endif %}
