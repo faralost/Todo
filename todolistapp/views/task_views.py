@@ -1,4 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
@@ -22,6 +23,8 @@ class TaskIndexView(SearchListView):
         return queryset.filter(is_deleted=False)
 
     def post(self, request, *args, **kwargs):
+        if not self.request.user.has_perm('todolistapp.delete_task'):
+            raise PermissionDenied
         tasks_id = request.POST.getlist('tasks_id')
         for id in tasks_id:
             task = Task.objects.get(pk=id)
@@ -40,10 +43,15 @@ class TaskView(DetailView):
         return task
 
 
-class TaskCreate(LoginRequiredMixin, CreateView):
+class TaskCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'todolistapp.add_task'
     form_class = TaskForm
     template_name = 'task/create.html'
     model = Task
+
+    def has_permission(self):
+        project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
+        return super().has_permission() and self.request.user in project.users.all()
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get("pk"))
@@ -51,7 +59,8 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class TaskDelete(LoginRequiredMixin, DeleteView):
+class TaskDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'todolistapp.delete_task'
     model = Task
 
     def delete(self, request, *args, **kwargs):
@@ -66,8 +75,12 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
         return reverse('todolistapp:project_view', kwargs={'pk': self.object.project.pk})
 
 
-class TaskUpdate(LoginRequiredMixin, UpdateView):
+class TaskUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'todolistapp.change_task'
     form_class = TaskForm
     template_name = 'task/update.html'
     model = Task
+
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().project.users.all()
 

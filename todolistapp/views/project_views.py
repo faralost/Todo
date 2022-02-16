@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -31,7 +31,8 @@ class ProjectView(DetailView):
         return context
 
 
-class ProjectCreate(LoginRequiredMixin, CreateView):
+class ProjectCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'todolistapp.add_project'
     template_name = 'project/create.html'
     form_class = ProjectForm
     model = Project
@@ -45,13 +46,15 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
         return reverse('todolistapp:project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectUpdate(LoginRequiredMixin, UpdateView):
+class ProjectUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'todolistapp.change_project'
     template_name = 'project/update.html'
     form_class = ProjectForm
     model = Project
 
 
-class ProjectDelete(LoginRequiredMixin, DeleteView):
+class ProjectDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'todolistapp.delete_project'
     template_name = 'project/delete.html'
     model = Project
     success_url = reverse_lazy('todolistapp:project_index')
@@ -64,7 +67,8 @@ class ProjectDelete(LoginRequiredMixin, DeleteView):
         return kwargs
 
 
-class ProjectAddUser(UpdateView):
+class ProjectAddUser(PermissionRequiredMixin, UpdateView):
+    permission_required = 'todolistapp.change_project'
     model = Project
     form_class = ProjectAddUserForm
     template_name = 'project/add-user.html'

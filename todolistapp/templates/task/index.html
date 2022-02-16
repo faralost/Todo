@@ -22,8 +22,12 @@
                     </label>
                 </div>
                 {% if user.is_authenticated %}
+                    {% if perms.todolistapp.delete_task %}
                     <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
+                    {% endif %}
+                    {% if perms.todolistapp.change_task and request.user in task.project.users.all %}
                     <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
             <br><br>
