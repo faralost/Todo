@@ -73,5 +73,10 @@ class ProjectChangeUser(PermissionRequiredMixin, UpdateView):
     form_class = ProjectAddUserForm
     template_name = 'project/add-user.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(ProjectChangeUser, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
     def has_permission(self):
         return super().has_permission() and self.request.user in self.get_object().users.all()

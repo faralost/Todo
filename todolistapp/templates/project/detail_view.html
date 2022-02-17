@@ -41,7 +41,7 @@
                         <a class="btn btn-warning" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать
                             проект</a>&nbsp;
                     {% endif %}
-                    {% if perms.todolistapp.change_project_users and request.user in project.users.all%}
+                    {% if perms.todolistapp.change_project_users and request.user in project.users.all %}
                         <a class="btn btn-info" href="{% url 'todolistapp:project_change_user' project.pk %}">Изменить
                             пользователей</a>
                     {% endif %}

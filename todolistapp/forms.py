@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.forms import widgets
 
@@ -67,3 +68,13 @@ class ProjectAddUserForm(forms.ModelForm):
         widgets = {
             'users': widgets.CheckboxSelectMultiple(),
         }
+
+    def __init__(self, *args, **kargs):
+        self.user = kargs.pop('user')
+        super().__init__(*args, **kargs)
+        self.fields['users'].queryset = User.objects.filter(is_superuser=False)
+
+    def clean(self):
+        if self.user not in self.cleaned_data.get('users'):
+            raise ValidationError("Нельзя удалять себя из списка пользователей")
+        return super(ProjectAddUserForm, self).clean()
