@@ -3,7 +3,7 @@
 {% block title %}Проект{% endblock %}
 
 {% block add-task-nav %}
-    {% if user.is_authenticated and request.user in project.users.all %}
+    {% if user.is_authenticated and request.user in project.users.all or request.user.is_superuser %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'todolistapp:project_task_add' project.pk %}">Добавить задачу</a>
         </li>
@@ -11,28 +11,28 @@
 {% endblock %}
 
 {% if user.is_authenticated %}
-{% block content %}
-    <div class="row">
-        <div class="col-md-9">
-            <div class="card text-center">
-                <div class="card-header">
-                    <p>дата начала: {{ project.date_start }}</p>
+    {% block content %}
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <p>дата начала: {{ project.date_start }}</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.name.title }}</h5>
+                        <p class="card-text">
+                        <pre>{{ project.description }}</pre>
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {% if project.date_end %}
+                            <p>дата окончания: {{ project.date_end }}</p>
+                        {% else %}
+                            <p>дата окончания: не определена</p>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ project.name.title }}</h5>
-                    <p class="card-text">
-                    <pre>{{ project.description }}</pre>
-                    </p>
-                </div>
-                <div class="card-footer text-muted">
-                    {% if project.date_end %}
-                        <p>дата окончания: {{ project.date_end }}</p>
-                    {% else %}
-                        <p>дата окончания: не определена</p>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="mt-2">
+                <div class="mt-2">
                     {% if perms.todolistapp.delete_project %}
                         <a class="btn btn-danger" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить
                             проект</a> &nbsp;
@@ -41,45 +41,48 @@
                         <a class="btn btn-warning" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать
                             проект</a>&nbsp;
                     {% endif %}
-                    {% if perms.todolistapp.change_project_users and request.user in project.users.all %}
+                    {% if perms.todolistapp.change_project_users and request.user in project.users.all or request.user.is_superuser %}
                         <a class="btn btn-info" href="{% url 'todolistapp:project_change_user' project.pk %}">Изменить
                             пользователей</a>
                     {% endif %}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h5>Пользователи:</h5>
+                <ul class="list-group">
+                    {% for user in project.users.all %}
+                        <li class="list-group-item">{{ user }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
-        <div class="col-md-3">
-            <h5>Пользователи:</h5>
-            <ul class="list-group">
-                {% for user in project.users.all %}
-                    <li class="list-group-item">{{ user }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
 
-    {% if project_tasks %}
-        <h2>Список задач данного проекта:</h2>
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
+
+        {% if project_tasks %}
+            <h2>Список задач данного проекта:</h2>
+            {% if is_paginated %}
+                {% include 'partial/pagination.html' %}
+            {% endif %}
+            {% for task in project_tasks %}
+                {% if perms.todolistapp.view_task and request.user in task.project.users.all or request.user.is_superuser %}
+                    <div class="list-group">
+                        <label for="#">
+                            <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action">
+                                {{ task.task }}
+                            </a>
+                        </label>
+                    </div>
+                    {% if perms.todolistapp.delete_task and request.user in task.project.users.all or request.user.is_superuser %}
+                        <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
+                    {% endif %}
+                    {% if perms.todolistapp.change_task and request.user in task.project.users.all or request.user.is_superuser %}
+                        <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <br><br>
+        {% else %}
+            <h3>Список задач данного проекта пока пуст</h3>
         {% endif %}
-        {% for task in project_tasks %}
-            <div class="list-group">
-                <label for="#">
-                    <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action">
-                        {{ task.task }}
-                    </a>
-                </label>
-            </div>
-                {% if perms.todolistapp.delete_task and request.user in task.project.users.all %}
-                    <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
-                {% endif %}
-                {% if perms.todolistapp.change_task and request.user in task.project.users.all %}
-                    <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
-                {% endif %}
-        {% endfor %}
-        <br><br>
-    {% else %}
-        <h3>Список задач данного проекта пока пуст</h3>
-    {% endif %}
-{% endblock %}
+    {% endblock %}
 {% endif %}

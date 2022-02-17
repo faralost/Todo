@@ -32,7 +32,8 @@ class TaskIndexView(LoginRequiredMixin, SearchListView):
         return redirect('todolistapp:task_index')
 
 
-class TaskView(LoginRequiredMixin, DetailView):
+class TaskView(PermissionRequiredMixin, DetailView):
+    permission_required = 'todolistapp.view_task'
     template_name = 'task/detail_view.html'
     model = Task
 
@@ -75,7 +76,8 @@ class TaskDelete(PermissionRequiredMixin, DeleteView):
         return reverse('todolistapp:project_view', kwargs={'pk': self.object.project.pk})
 
     def has_permission(self):
-        return super().has_permission() and self.request.user in self.get_object().project.users.all()
+        return super().has_permission() and self.request.user in self.get_object().project.users.all() \
+               or self.request.user.is_superuser
 
 
 class TaskUpdate(PermissionRequiredMixin, UpdateView):
@@ -85,4 +87,5 @@ class TaskUpdate(PermissionRequiredMixin, UpdateView):
     model = Task
 
     def has_permission(self):
-        return super().has_permission() and self.request.user in self.get_object().project.users.all()
+        return super().has_permission() and self.request.user in self.get_object().project.users.all() \
+            or self.request.user.is_superuser

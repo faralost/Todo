@@ -75,6 +75,6 @@ class ProjectAddUserForm(forms.ModelForm):
         self.fields['users'].queryset = User.objects.filter(is_superuser=False)
 
     def clean(self):
-        if self.user not in self.cleaned_data.get('users'):
+        if not self.user.is_superuser and self.user not in self.cleaned_data.get('users'):
             raise ValidationError("Нельзя удалять себя из списка пользователей")
         return super(ProjectAddUserForm, self).clean()

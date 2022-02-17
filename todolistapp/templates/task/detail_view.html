@@ -31,10 +31,10 @@
     </div>
 
     <div class="container">
-            {% if perms.todolistapp.delete_task and request.user in task.project.users.all %}
+            {% if perms.todolistapp.delete_task and request.user in task.project.users.all or request.user.is_superuser %}
             <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить задачу</a> &nbsp;
             {% endif %}
-            {% if perms.todolistapp.change_task and request.user in task.project.users.all %}
+            {% if perms.todolistapp.change_task and request.user in task.project.users.all or request.user.is_superuser%}
                 <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать задачу</a>
         {% endif %}
     </div>
