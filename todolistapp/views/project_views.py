@@ -20,14 +20,17 @@ class ProjectIndexView(LoginRequiredMixin, ListView):
 class ProjectView(LoginRequiredMixin, DetailView):
     template_name = 'project/detail_view.html'
     model = Project
+    paginate_related_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
-        page = self.request.GET.get('page')
-        project_tasks = Paginator(self.object.tasks.all().filter(is_deleted=False).order_by('-created_at'), 5)
-        context['project_tasks'] = project_tasks.get_page(page)
-        context['page_obj'] = project_tasks.get_page(page)
-        context['is_paginated'] = project_tasks.get_page(page)
+        tasks = self.object.tasks.all().filter(is_deleted=False).order_by('-created_at')
+        paginator = Paginator(tasks, self.paginate_related_by)
+        page_number = self.request.GET.get('page', 1)
+        page = paginator.get_page(page_number)
+        context['page_obj'] = page
+        context['project_tasks'] = page.object_list
+        context['is_paginated'] = page.has_other_pages()
         return context
 
 
