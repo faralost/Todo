@@ -4,16 +4,16 @@
         <div class="list-group">
             <label for="#">
                 <a href="{% url 'todolistapp:project_view' project.pk %}"
-                   class="list-group-item list-group-item-action">
+                   class="list-group-item list-group-item-action mt-1 mb-1">
                     {{ project.name.title }}
                 </a>
             </label>
         </div>
         {% if perms.todolistapp.delete_project %}
-            <a class="mylink" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить</a> &nbsp;
+            <a class="btn btn-danger" href="{% url 'todolistapp:project_delete' project.pk %}">Удалить</a> &nbsp;
         {% endif %}
         {% if perms.todolistapp.change_project %}
-            <a class="mylink" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать</a>
+            <a class="btn btn-warning" href="{% url 'todolistapp:project_update' project.pk %}">Редактировать</a>
         {% endif %}
     {% endfor %}
 {% endif %}

@@ -16,7 +16,7 @@
                     {% if perms.todolistapp.view_task and request.user in task.project.users.all or request.user.is_superuser %}
                         <div class="list-group">
                             <label for="#">
-                                <a href="{{ task.get_absolute_url }}" class="list-group-item list-group-item-action"
+                                <a href="{{ task.get_absolute_url }}" class="mt-1 mb-1 list-group-item list-group-item-action"
                                    aria-current="true">
                                     <input type="checkbox" name="tasks_id" value="{{ task.pk }}">&nbsp;
                                     {{ task.task }} --> (Проект: {{ task.project }})
@@ -24,15 +24,15 @@
                             </label>
                         </div>
                         {% if perms.todolistapp.delete_task and request.user in task.project.users.all or request.user.is_superuser %}
-                            <a class="mylink" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
+                            <a class="btn btn-danger" href="{% url 'todolistapp:task_delete' task.pk %}">Удалить</a> &nbsp;
                         {% endif %}
                         {% if perms.todolistapp.change_task and request.user in task.project.users.all or request.user.is_superuser %}
-                            <a class="mylink" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
+                            <a class="btn btn-warning" href="{% url 'todolistapp:task_update' task.pk %}">Редактировать</a>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
                 <br><br>
-                <button type="submit" class="btn btn-primary">Удалить выбранные задачи</button>
+                <button type="submit" class="btn btn-danger">Удалить выбранные задачи</button>
                 <br>
             </form>
             <br>

@@ -10,6 +10,6 @@
         {% include 'partial/form.html' with button_text="Удалить" %}
     </form>
     <br>
-    <a class="btn btn-primary" href="{% url "todolistapp:project_view" project.pk %}">Не удалять</a>
+    <a class="btn btn-info" href="{% url "todolistapp:project_view" project.pk %}">Не удалять</a>
 {% endblock %}
 {% endif %}
