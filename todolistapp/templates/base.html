@@ -39,6 +39,11 @@
                             </li>
                         {% endif %}
                     {% endblock %}
+                    {% if user.is_authenticated and perms.accounts.view_profile %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:users' %}">Пользователи</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 {% if user.is_authenticated %}
                     {% include 'partial/simple_search.html' with form=search_form %}
