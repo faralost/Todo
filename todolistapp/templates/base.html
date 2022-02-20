@@ -48,7 +48,7 @@
                 {% if user.is_authenticated %}
                     {% include 'partial/simple_search.html' with form=search_form %}
                     &nbsp;
-                    <span>Привет, <a class="mylink" href="{% url 'accounts:detail_profile' user.pk %}">{{ user.username }}!</a></span>
+                    <span>Привет, <a class="mylink" href="{% url 'accounts:detail_profile' user.profile.slug %}">{{ user.username }}!</a></span>
                     <a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" class="nav-link">Выход</a>
                 {% else %}
                     <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" class="nav-link">Вход</a>

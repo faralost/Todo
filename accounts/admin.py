@@ -7,7 +7,7 @@ from accounts.models import Profile
 
 class ProfileInline(admin.StackedInline):
     model = Profile
-    fields = ['avatar', 'github_profile', 'about']
+    fields = ['avatar', 'github_profile', 'about', 'slug']
 
 
 class ProfileAdmin(UserAdmin):

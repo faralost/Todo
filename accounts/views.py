@@ -34,6 +34,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+    slug_field = 'profile__slug'
 
     def get_context_data(self, **kwargs):
         projects = self.object.projects.order_by('-date_end')
