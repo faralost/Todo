@@ -533,14 +533,31 @@
   "pk": 39,
   "fields": {
     "task": "first task",
-    "description": "ffffffffffff",
+    "description": "ffffffffffffnnnn",
     "status": 1,
     "created_at": "2022-02-16T13:06:19.691Z",
-    "updated_at": "2022-02-16T13:06:19.691Z",
+    "updated_at": "2022-02-17T11:22:34.618Z",
     "project": 19,
     "is_deleted": false,
     "types": [
       3
+    ]
+  }
+},
+{
+  "model": "todolistapp.task",
+  "pk": 40,
+  "fields": {
+    "task": "fsdanfkjsdnafkj",
+    "description": "sadfas",
+    "status": 1,
+    "created_at": "2022-02-17T11:23:58.776Z",
+    "updated_at": "2022-02-17T11:24:04.415Z",
+    "project": 19,
+    "is_deleted": true,
+    "types": [
+      1,
+      2
     ]
   }
 },
@@ -604,7 +621,7 @@
   "pk": 19,
   "fields": {
     "name": "project of manager",
-    "description": "pm",
+    "description": "pmkllmmm",
     "date_start": "2022-02-17",
     "date_end": null,
     "users": [
