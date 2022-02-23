@@ -1,6 +1,7 @@
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
@@ -102,10 +103,14 @@ class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
-    # slug_field = 'profile__slug'
+
+    def form_valid(self, form):
+        user = form.save()
+        update_session_auth_hash(self.request, user)
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_object(self, queryset=None):
         return self.request.user
 
     def get_success_url(self):
-        return reverse('accounts:login')
+        return reverse('accounts:detail_profile', kwargs={'slug': self.object.profile.slug})
