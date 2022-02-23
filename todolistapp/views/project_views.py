@@ -4,7 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from todolistapp.forms import ProjectForm, ProjectDeleteForm, ProjectAddUserForm
-from todolistapp.models import Project, Task
+from todolistapp.models import Project
 
 
 class ProjectIndexView(LoginRequiredMixin, ListView):
