@@ -54,12 +54,14 @@ class UsersListView(PermissionRequiredMixin, ListView):
         return super().get_queryset().exclude(is_superuser=True)
 
 
-class UserChangeView(UpdateView):
+class UserChangeView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserChangeForm
     template_name = 'user_change.html'
     context_object_name = 'user_obj'
-    slug_field = 'profile__slug'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
     def get_context_data(self, **kwargs):
         if 'profile_form' not in kwargs:
@@ -95,12 +97,15 @@ class UserChangeView(UpdateView):
         return reverse('accounts:detail_profile', kwargs={'slug': self.object.profile.slug})
 
 
-class UserPasswordChangeView(UpdateView):
+class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
-    slug_field = 'profile__slug'
+    # slug_field = 'profile__slug'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
     def get_success_url(self):
         return reverse('accounts:login')

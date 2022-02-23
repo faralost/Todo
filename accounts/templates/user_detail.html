@@ -3,10 +3,12 @@
 {% block title %}Личная страница{% endblock %}
 
 {% block menu_links %}
-    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_change' user_obj.profile.slug %}">Редактировать</a>
-    </li>
-    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:password_change' user_obj.profile.slug %}">Смена
-        пароля</a></li>
+    {% if request.user == user_obj %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_change' %}">Редактировать</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:password_change' %}">Смена
+            пароля</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
