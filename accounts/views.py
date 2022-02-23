@@ -1,12 +1,16 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic.detail import SingleObjectMixin
 
-from accounts.forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm
+from accounts.forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm, PasswordChangeForm
 from accounts.models import Profile
+
+
+User = get_user_model()
 
 
 class RegisterView(CreateView):
@@ -30,7 +34,7 @@ class RegisterView(CreateView):
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
-    model = get_user_model()
+    model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
     slug_field = 'profile__slug'
@@ -51,7 +55,7 @@ class UsersListView(PermissionRequiredMixin, ListView):
 
 
 class UserChangeView(UpdateView):
-    model = get_user_model()
+    model = User
     form_class = UserChangeForm
     template_name = 'user_change.html'
     context_object_name = 'user_obj'
@@ -89,3 +93,14 @@ class UserChangeView(UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:detail_profile', kwargs={'slug': self.object.profile.slug})
+
+
+class UserPasswordChangeView(UpdateView):
+    model = User
+    template_name = 'user_password_change.html'
+    form_class = PasswordChangeForm
+    context_object_name = 'user_obj'
+    slug_field = 'profile__slug'
+
+    def get_success_url(self):
+        return reverse('accounts:login')
