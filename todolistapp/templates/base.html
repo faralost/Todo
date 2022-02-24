@@ -55,8 +55,12 @@
                                      href="{% url 'accounts:detail_profile' user.profile.slug %}">{{ user.username }}!</a></span>
                     <a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" class="nav-link">Выход</a>
                 {% else %}
+                    {% block login-nav-link %}
                     <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" class="nav-link">Вход</a>
+                    {% endblock %}
+                    {% block registration-nav-link %}
                     <a href="{% url 'accounts:registration' %}?next={{ request.get_full_path }}" class="nav-link">Регистрация</a>
+                    {% endblock %}
                 {% endif %}
             </div>
         </div>

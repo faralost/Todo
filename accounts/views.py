@@ -30,7 +30,7 @@ class RegisterView(CreateView):
         if not next_url:
             next_url = self.request.POST.get('next')
         if not next_url:
-            next_url = reverse('webapp:index')
+            next_url = reverse('todolistapp:project_index')
         return next_url
 
 

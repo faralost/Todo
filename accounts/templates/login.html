@@ -2,6 +2,10 @@
 
 {% block title %}Аутентификация{% endblock %}
 
+{% block registration-nav-link %}
+    <a href="{% url 'accounts:registration' %}" class="nav-link">Регистрация</a>
+{% endblock %}
+
 {% block content %}
 
     <main class="form-signin text-center w-50 ms-auto me-auto mt-5">
